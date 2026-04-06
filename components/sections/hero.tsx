@@ -1,0 +1,127 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Search } from "lucide-react";
+import { fadeUp, stagger } from "@/lib/animations";
+import type { Dictionary } from "@/app/[locale]/dictionaries";
+
+export default function Hero({ dict }: { dict: Dictionary }) {
+  const t = dict.hero;
+  const filters = [t.city, t.house, t.apartment, t.residential];
+
+  return (
+    <section className="relative min-h-screen overflow-hidden flex flex-col justify-center lg:justify-end pb-0 lg:pb-12">
+      {/* Full background image */}
+      <div
+        className="absolute inset-0 bg-[url('/images/hero-bg.webp')] bg-cover bg-center"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-black/45" aria-hidden="true" />
+
+      <div className="relative max-w-[1400px] mx-auto px-6 w-full flex flex-col items-center lg:items-start">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+          className="max-w-2xl mb-8 text-center lg:text-left items-center lg:items-start flex flex-col"
+        >
+          {/* Badges */}
+          <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mb-7">
+            {[t.badge_home, t.badge_apartment, t.badge_residence].map((b) => (
+              <span
+                key={b}
+                className="px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/15 backdrop-blur-md text-white border border-white/20"
+              >
+                {b}
+              </span>
+            ))}
+          </motion.div>
+
+          {/* Title */}
+          <motion.h1
+            variants={fadeUp}
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-[72px] text-white leading-[1.08] mb-4 sm:mb-5"
+          >
+            <span className="font-normal">{t.title_1}</span>
+            <br />
+            <span className="font-bold">{t.title_2}</span>
+          </motion.h1>
+
+          {/* Sub judul */}
+          <motion.p variants={fadeUp} className="text-white/80 text-base leading-relaxed max-w-lg mb-3">
+            {t.description}
+          </motion.p>
+
+          {/* Sub sub judul + WhatsApp CTA */}
+          <motion.p variants={fadeUp} className="text-white/60 text-sm mb-6">
+            {t.sub_description}
+          </motion.p>
+
+          <motion.a
+            variants={fadeUp}
+            href="https://wa.me/6281234567890"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full transition-colors"
+            style={{ background: "var(--fg)", color: "var(--bg)" }}
+          >
+            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            {t.whatsapp_cta}
+          </motion.a>
+        </motion.div>
+
+        {/* Search box */}
+        {/* <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.4 }}
+          className="rounded-2xl shadow-2xl p-6 max-w-5xl"
+          style={{ background: "var(--card)" }}
+        >
+          <h2 className="text-lg font-bold mb-5" style={{ color: "var(--fg)" }}>{t.search_title}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+            {[
+              { label: t.category, placeholder: "Enter Type" },
+              { label: t.price, placeholder: "Price" },
+              { label: t.location, placeholder: "LONDON" },
+              { label: t.rooms, placeholder: "2 Room" },
+            ].map((field) => (
+              <div key={field.label}>
+                <label className="text-xs block mb-1.5" style={{ color: "var(--muted-fg)" }}>{field.label}</label>
+                <input
+                  type="text"
+                  placeholder={field.placeholder}
+                  className="w-full rounded-lg px-3 py-2.5 text-sm outline-none transition-colors"
+                  style={{ background: "var(--muted)", color: "var(--fg)", border: "1px solid var(--border)" }}
+                  readOnly
+                />
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="text-sm font-medium" style={{ color: "var(--muted-fg)" }}>Filter</span>
+            {filters.map((f) => (
+              <button
+                key={f}
+                className="px-5 py-2 rounded-full text-sm font-medium transition-colors"
+                style={{ background: "var(--muted)", color: "var(--muted-fg)" }}
+              >
+                {f}
+              </button>
+            ))}
+            <button
+              className="ml-auto p-3 rounded-full transition-colors"
+              style={{ background: "var(--fg)", color: "var(--bg)" }}
+              aria-label="Search"
+            >
+              <Search className="w-5 h-5" />
+            </button>
+          </div>
+        </motion.div> */}
+      </div>
+    </section>
+  );
+}
