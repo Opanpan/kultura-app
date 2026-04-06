@@ -5,7 +5,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${YELLOW}=== Let's Encrypt SSL Certificate Initialization ===${NC}\n"
+echo -e "${YELLOW}=== Kultura Production Deployment ===${NC}\n"
 
 if [ ! -f .env ]; then
     echo -e "${RED}Error: .env file not found. Copy .env.example to .env and fill in DOMAIN and EMAIL${NC}"
@@ -27,65 +27,42 @@ fi
 echo -e "Domain: ${GREEN}$DOMAIN${NC}"
 echo -e "Email:  ${GREEN}$EMAIL${NC}\n"
 
-mkdir -p ./certbot-conf ./certbot-www
-chmod 777 ./certbot-conf ./certbot-www
+# Step 1: Start shared proxy network (if not already running)
+echo -e "${YELLOW}Step 1: Ensuring shared reverse proxy is running...${NC}\n"
 
-if [ -d "./certbot-conf/live/$DOMAIN" ]; then
-    echo -e "${YELLOW}Certificate for $DOMAIN already exists. Skipping initialization.${NC}"
-    exit 0
+if ! docker network inspect proxy-network >/dev/null 2>&1; then
+    echo -e "Creating proxy-network..."
 fi
 
-echo -e "${YELLOW}Step 1: Ensuring no conflicts on port 80...${NC}\n"
-
-docker compose --profile production down 2>/dev/null || true
-
-if [ -f "./certbot-conf/.certbot.lock" ]; then
-    sudo rm -f ./certbot-conf/.certbot.lock
+if ! docker ps --format '{{.Names}}' | grep -q '^nginx-proxy$'; then
+    echo -e "Starting nginx-proxy + acme-companion..."
+    cp .env proxy-network/.env 2>/dev/null || true
+    docker compose -f proxy-network/docker-compose.yml up -d
+    sleep 3
 fi
 
-echo -e "${GREEN}✓ Ports cleared${NC}\n"
+echo -e "${GREEN}✓ Reverse proxy is running${NC}\n"
 
-echo -e "${YELLOW}Step 2: Requesting SSL certificate from Let's Encrypt...${NC}\n"
+# Step 2: Start kultura app
+echo -e "${YELLOW}Step 2: Starting Kultura app...${NC}\n"
 
-docker run --rm \
-    -v "$(pwd)/certbot-conf:/etc/letsencrypt" \
-    -v "$(pwd)/certbot-www:/var/www/certbot" \
-    -p 80:80 \
-    -p 443:443 \
-    certbot/certbot:latest certonly \
-    --standalone \
-    -d "$DOMAIN" \
-    --email "$EMAIL" \
-    --agree-tos \
-    --non-interactive
+docker compose up -d --build
 
-if [ $? -eq 0 ]; then
-    echo -e "\n${GREEN}✓ SSL certificate successfully obtained!${NC}\n"
-else
-    echo -e "\n${RED}Error: Failed to obtain SSL certificate${NC}"
-    echo -e "  1. Domain is not pointing to your VPS IP"
-    echo -e "  2. Port 80 is not accessible from the internet"
-    echo -e "  3. DNS has not propagated yet"
-    exit 1
-fi
+sleep 5
 
-echo -e "${YELLOW}Step 3: Starting full production stack...${NC}\n"
+echo -e "${GREEN}✓ Kultura app started${NC}\n"
 
-docker compose --profile production up -d
-
-sleep 3
-
-echo -e "${GREEN}✓ Production stack started${NC}\n"
-
+# Step 3: Verify
 echo -e "${YELLOW}Verifying deployment...${NC}\n"
 
-for svc in kultura-app kultura-nginx kultura-certbot; do
-    if docker compose ps | grep -q "$svc.*running"; then
+for svc in nginx-proxy acme-companion kultura-app; do
+    if docker ps --format '{{.Names}}' | grep -q "^${svc}$"; then
         echo -e "${GREEN}✓ $svc is running${NC}"
     else
         echo -e "${RED}✗ $svc is not running${NC}"
     fi
 done
 
-echo -e "\n${GREEN}=== Initialization Complete ===${NC}"
+echo -e "\n${GREEN}=== Deployment Complete ===${NC}"
+echo -e "SSL will be auto-provisioned by acme-companion within ~1 minute."
 echo -e "Visit ${GREEN}https://$DOMAIN${NC} to verify\n"
