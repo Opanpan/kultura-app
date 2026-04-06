@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "property": "Property",
+    "service": "Service",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "contact": "Contact",
+    "login": "Login"
+  },
+  "hero": {
+    "badge_home": "Home",
+    "badge_apartment": "Apartments",
+    "badge_residence": "Residence",
+    "title_1": "Every happiness",
+    "title_2": "begins at home",
+    "description": "A home is not just a place to return to, but a space to feel comfortable, relevant, and create happiness.",
+    "sub_description": "Because happiness is simple, it starts from the right home.",
+    "whatsapp_cta": "Chat via WhatsApp",
+    "search_title": "Find a best place",
+    "category": "Category",
+    "price": "Enter Price",
+    "location": "Location",
+    "rooms": "Number Of Room",
+    "all": "All",
+    "city": "City",
+    "house": "House",
+    "apartment": "Apartments",
+    "residential": "Residential"
+  },
+  "primary": {
+    "title": "Experience built from",
+    "title_bold": "real projects, not just plans.",
+    "subtitle": "Over 20 years building residential areas relevant to market needs",
+    "description": "We build every residence with locations that simplify daily life, prices that feel reasonable, and designs that are relevant and comfortable for the long term",
+    "sub_description": "All of this forms the foundation of how we work",
+    "stat_1_value": "100+",
+    "stat_1_unit": "Hectares",
+    "stat_1_label": "of area developed",
+    "stat_2_value": "7000+",
+    "stat_2_unit": "Units",
+    "stat_2_label": "built and sold",
+    "stat_3_value": "20+",
+    "stat_3_unit": "Years",
+    "stat_3_label": "in the property industry"
+  },
+  "stats": {
+    "rent": "Hectares of area developed",
+    "buy": "Units built and sold",
+    "cities": "Years in the property industry",
+    "total": "",
+    "rent_count": "100+",
+    "buy_count": "7000+",
+    "cities_count": "20+",
+    "total_count": ""
+  },
+  "bestValue": {
+    "title": "Discover Properties with the Best Value",
+    "description": "We connect buyers and sellers through a trusted platform with verified properties, transparent deals.",
+    "cta": "Find Nearest Properties"
+  },
+  "explore": {
+    "title": "Explore Available Houses Near Your Location",
+    "description": "Discover hidden gems in your neighborhood. Your dream home is closer than you think. Explore beautiful houses with modern designs and communities.",
+    "card_title": "Golden Resilience London USA",
+    "card_price": "$533367"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "description": "We connect buyers and sellers through a trusted platform with verified properties, transparent deals, and expert guidance—supporting you at every step.",
+    "q1": "Are the properties listed on your platform verified?",
+    "a1": "Yes, we list only verified and legally clear properties to ensure a safe and transparent experience for both buyers and sellers.",
+    "q2": "Do you provide services for both buyers and sellers?",
+    "a2": "Yes, our platform caters to both buyers and sellers with comprehensive tools and support.",
+    "q3": "Can I get guidance for real estate investment?",
+    "a3": "Absolutely! Our expert team provides tailored real estate investment guidance to meet your needs.",
+    "q4": "How secure is the property buying process?",
+    "a4": "We use multi-layer verification and escrow processes to ensure your transaction security.",
+    "q5": "Do you deal in both residential and commercial properties?",
+    "a5": "Yes, we handle various property types including residential, commercial, and land."
+  },
+  "testimonials": {
+    "title": "What our clients say about us",
+    "description": "We connect buyers and sellers through a trusted platform with verified properties, transparent deals, and expert guidance—supporting you at every step.",
+    "quote": "An excellent real estate platform with verified listings and complete transparency. The team guided us professionally from start to finish, making the entire buying process smooth and stress-free."
+  },
+  "cta": {
+    "title_1": "Ready to make your Dream",
+    "title_2": "property a reality",
+    "description": "We connect buyers and sellers through a trusted platform with verified properties, transparent deals, and expert guidance—supporting you at every step.",
+    "button": "Start Now"
+  },
+  "footer": {
+    "discover": "Discover Nature Wonders with Expert Guidance",
+    "description": "We connect buyers and sellers through a trusted platform with verified properties, transparent deals, and expert guidance—supporting you at every step.",
+    "rights": "2024 Kultura Inc. All Rights Reserved.",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  }
+}

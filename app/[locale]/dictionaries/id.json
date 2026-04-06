@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "property": "Properti",
+    "service": "Layanan",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "contact": "Kontak",
+    "login": "Masuk"
+  },
+  "hero": {
+    "badge_home": "Beranda",
+    "badge_apartment": "Apartemen",
+    "badge_residence": "Residensi",
+    "title_1": "Awal dari setiap",
+    "title_2": "kebahagiaan ada dirumah",
+    "description": "Rumah bukan cuma tempat pulang, tapi untuk jadi ruang yang nyaman, relevan dan menciptakan kebahagiaan.",
+    "sub_description": "Karena kebahagiaan itu sederhana, berawal dari rumah yang tepat.",
+    "whatsapp_cta": "Hubungi via WhatsApp",
+    "search_title": "Temukan tempat terbaik",
+    "category": "Kategori",
+    "price": "Harga",
+    "location": "Lokasi",
+    "rooms": "Jumlah Kamar",
+    "all": "Semua",
+    "city": "Kota",
+    "house": "Rumah",
+    "apartment": "Apartemen",
+    "residential": "Residensial"
+  },
+  "primary": {
+    "title": "Pengalaman yang terbangun dari",
+    "title_bold": "proyek nyata, bukan hanya rencana.",
+    "subtitle": "Lebih dari 20 tahun membangun kawasan hunian yang relevan dengan kebutuhan pasar",
+    "description": "Kami membuat setiap hunian dengan lokasi yang memudahkan aktivitas, harga yang terasa masuk akal, desain yang relevan dan nyaman untuk jangka panjang",
+    "sub_description": "Semua ini jadi dasar cara kami bekerja",
+    "stat_1_value": "100+",
+    "stat_1_unit": "Hektare",
+    "stat_1_label": "kawasan sudah dikembangkan",
+    "stat_2_value": "7000+",
+    "stat_2_unit": "Unit",
+    "stat_2_label": "terbangun dan terjual",
+    "stat_3_value": "20+",
+    "stat_3_unit": "Tahun",
+    "stat_3_label": "Di industri property"
+  },
+  "stats": {
+    "rent": "Hektare kawasan sudah dikembangkan",
+    "buy": "Unit terbangun dan terjual",
+    "cities": "Tahun di industri property",
+    "total": "",
+    "rent_count": "100+",
+    "buy_count": "7000+",
+    "cities_count": "20+",
+    "total_count": ""
+  },
+  "bestValue": {
+    "title": "Temukan Properti dengan Nilai Terbaik",
+    "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan.",
+    "cta": "Temukan Properti Terdekat"
+  },
+  "explore": {
+    "title": "Jelajahi Rumah Tersedia di Dekat Lokasi Anda",
+    "description": "Temukan permata tersembunyi di lingkungan Anda. Rumah impian Anda lebih dekat dari yang Anda kira. Jelajahi rumah-rumah indah dengan desain modern dan komunitas yang nyaman.",
+    "card_title": "Golden Resilience London USA",
+    "card_price": "$533367"
+  },
+  "faq": {
+    "title": "Pertanyaan yang Sering Diajukan",
+    "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan, dan panduan ahli—mendukung Anda di setiap langkah.",
+    "q1": "Apakah properti yang terdaftar di platform Anda terverifikasi?",
+    "a1": "Ya, kami hanya mencantumkan properti terverifikasi dan legal untuk memastikan pengalaman yang aman dan transparan bagi pembeli dan penjual.",
+    "q2": "Apakah Anda menyediakan layanan untuk pembeli dan penjual?",
+    "a2": "Ya, platform kami melayani pembeli dan penjual dengan alat dan dukungan komprehensif.",
+    "q3": "Bisakah saya mendapatkan panduan untuk investasi properti?",
+    "a3": "Tentu saja! Tim ahli kami menyediakan panduan investasi properti yang disesuaikan dengan kebutuhan Anda.",
+    "q4": "Seberapa aman proses pembelian properti?",
+    "a4": "Kami menggunakan proses verifikasi berlapis dan escrow untuk memastikan keamanan transaksi Anda.",
+    "q5": "Apakah Anda menangani properti residensial dan komersial?",
+    "a5": "Ya, kami menangani berbagai jenis properti termasuk residensial, komersial, dan tanah."
+  },
+  "testimonials": {
+    "title": "Apa kata klien kami tentang kami",
+    "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan, dan panduan ahli—mendukung Anda di setiap langkah.",
+    "quote": "Platform properti yang luar biasa dengan listing terverifikasi dan transparansi penuh. Tim membimbing kami secara profesional dari awal hingga akhir, membuat seluruh proses pembelian lancar dan bebas stres."
+  },
+  "cta": {
+    "title_1": "Siap mewujudkan properti",
+    "title_2": "impian Anda",
+    "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan, dan panduan ahli—mendukung Anda di setiap langkah.",
+    "button": "Mulai Sekarang"
+  },
+  "footer": {
+    "discover": "Temukan Keajaiban Alam dengan Panduan Ahli",
+    "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan, dan panduan ahli—mendukung Anda di setiap langkah.",
+    "rights": "2024 Kultura Inc. Hak Cipta Dilindungi.",
+    "terms": "Syarat & Ketentuan",
+    "privacy": "Kebijakan Privasi"
+  }
+}
