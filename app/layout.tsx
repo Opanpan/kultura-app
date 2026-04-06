@@ -30,6 +30,8 @@ export const metadata: Metadata = {
     "properti",
     "rumah dijual",
     "kultura",
+    "real estate Indonesia",
+    "jual rumah",
   ],
   robots: {
     index: true,
@@ -45,14 +47,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Kultura",
+    locale: "id_ID",
+    alternateLocale: "en_US",
     images: [{ url: "/og/og-image.jpg", width: 1200, height: 630, alt: "Kultura Real Estate" }],
   },
   twitter: { card: "summary_large_image" },
+  other: {
+    "geo.region": "ID",
+    "geo.placename": "Indonesia",
+    "ICBM": "-6.2088, 106.8456",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id" className={`${jakarta.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full flex flex-col">
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}})()` }} />
         {children}
