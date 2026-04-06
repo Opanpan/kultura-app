@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, LazyMotion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ui/theme-toggle";
 import type { Dictionary, Locale } from "@/app/[locale]/dictionaries";
 
+const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default);
 const navLinks = ["home", "about", "property", "service", "faq", "blog", "contact"] as const;
 
 export default function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
@@ -19,14 +20,13 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
   return (
-    <>
+    <LazyMotion features={loadFeatures} strict>
       <header className="fixed top-0 inset-x-0 z-50">
         <div className="mx-auto max-w-[1400px] px-6 pt-4 flex items-center justify-between">
           <Link href={`/${locale}`} className={`text-sm whitespace-nowrap transition-colors duration-300 ${scrolled && !open ? "text-[var(--fg)]" : "text-white/80"}`}>
@@ -68,7 +68,6 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
             </Link>
           </div>
 
-          {/* Mobile toggle */}
           <button
             className={`lg:hidden relative z-[60] p-2 transition-colors duration-300 ${open ? "text-[var(--fg)]" : scrolled ? "text-[var(--fg)]" : "text-white"}`}
             onClick={() => setOpen(!open)}
@@ -79,10 +78,9 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
         </div>
       </header>
 
-      {/* Full-screen mobile menu */}
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -90,25 +88,18 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
             className="fixed inset-0 z-50 lg:hidden flex flex-col"
             style={{ background: "var(--bg)" }}
           >
-            {/* Top bar */}
             <div className="flex items-center justify-between px-6 pt-4">
               <Link href={`/${locale}`} className="text-sm" style={{ color: "var(--fg)" }} onClick={() => setOpen(false)}>
                 Logo Here
               </Link>
-              <button
-                className="p-2"
-                style={{ color: "var(--fg)" }}
-                onClick={() => setOpen(false)}
-                aria-label="Close menu"
-              >
+              <button className="p-2" style={{ color: "var(--fg)" }} onClick={() => setOpen(false)} aria-label="Close menu">
                 <X className="w-6 h-6" />
               </button>
             </div>
 
-            {/* Nav links */}
             <nav className="flex-1 flex flex-col justify-center px-8 gap-1">
               {navLinks.map((key, i) => (
-                <motion.div
+                <m.div
                   key={key}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -116,9 +107,7 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
                 >
                   <Link
                     href={`/${locale}`}
-                    className={`block py-4 text-3xl font-bold transition-colors border-b ${
-                      key === "home" ? "" : ""
-                    }`}
+                    className="block py-4 text-3xl font-bold transition-colors border-b"
                     style={{
                       color: key === "home" ? "var(--fg)" : "var(--muted-fg)",
                       borderColor: "var(--border)",
@@ -127,12 +116,11 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
                   >
                     {dict.nav[key]}
                   </Link>
-                </motion.div>
+                </m.div>
               ))}
             </nav>
 
-            {/* Bottom actions */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.3 }}
@@ -150,10 +138,10 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
                 </Link>
               </div>
               <p className="text-xs" style={{ color: "var(--muted-fg)" }}>© Kultura</p>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </>
+    </LazyMotion>
   );
 }

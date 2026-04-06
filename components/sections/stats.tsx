@@ -1,9 +1,11 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { m, LazyMotion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { fadeUp, stagger } from "@/lib/animations";
 import type { Dictionary } from "@/app/[locale]/dictionaries";
+
+const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default);
 
 function AnimatedNumber({ target }: { target: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -39,23 +41,25 @@ export default function Stats({ dict }: { dict: Dictionary }) {
   ].filter((i) => i.value);
 
   return (
-    <section className="py-16" style={{ background: "var(--bg)", borderTop: "1px solid var(--border)" }}>
-      <motion.div
-        variants={stagger}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        className="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center"
-      >
-        {items.map((item) => (
-          <motion.div key={item.label} variants={fadeUp}>
-            <p className="text-xs mb-2 tracking-wide" style={{ color: "var(--muted-fg)" }}>{item.label}</p>
-            <p className="text-4xl md:text-5xl font-bold" style={{ color: "var(--fg)" }}>
-              <AnimatedNumber target={item.value} />
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
-    </section>
+    <LazyMotion features={loadFeatures} strict>
+      <section className="py-16" style={{ background: "var(--bg)", borderTop: "1px solid var(--border)" }}>
+        <m.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center"
+        >
+          {items.map((item) => (
+            <m.div key={item.label} variants={fadeUp}>
+              <p className="text-xs mb-2 tracking-wide" style={{ color: "var(--muted-fg)" }}>{item.label}</p>
+              <p className="text-4xl md:text-5xl font-bold" style={{ color: "var(--fg)" }}>
+                <AnimatedNumber target={item.value} />
+              </p>
+            </m.div>
+          ))}
+        </m.div>
+      </section>
+    </LazyMotion>
   );
 }
