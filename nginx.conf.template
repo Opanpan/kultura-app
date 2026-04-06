@@ -39,7 +39,7 @@ http {
     # HTTP → HTTPS redirect
     server {
         listen 80;
-        server_name kultura.id www.kultura.id;
+        server_name ${DOMAIN} www.${DOMAIN};
 
         location /.well-known/acme-challenge/ {
             root /var/www/certbot;
@@ -54,11 +54,11 @@ http {
     server {
         listen 443 ssl;
         http2 on;
-        server_name kultura.id www.kultura.id;
+        server_name ${DOMAIN} www.${DOMAIN};
 
         # SSL
-        ssl_certificate /etc/letsencrypt/live/kultura.id/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/kultura.id/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
         ssl_session_timeout 1d;
         ssl_session_cache shared:SSL:50m;
         ssl_session_tickets off;

@@ -26,10 +26,15 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN}
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
       - ./certbot-conf:/etc/letsencrypt:ro
       - ./certbot-www:/var/www/certbot:ro
+    # envsubst replaces ${DOMAIN} in template → /etc/nginx/nginx.conf
+    command: >
+      sh -c "envsubst '$$DOMAIN' < /etc/nginx/templates/default.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
     depends_on:
       kultura:
         condition: service_healthy

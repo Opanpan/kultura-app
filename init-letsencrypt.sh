@@ -5,21 +5,27 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-DOMAIN="kultura.id"
-EMAIL="your@email.com"
-
 echo -e "${YELLOW}=== Let's Encrypt SSL Certificate Initialization ===${NC}\n"
 
-if [ -f .env ]; then
-    export $(cat .env | grep -v '#' | xargs)
-    DOMAIN=${DOMAIN:-kultura.id}
-    EMAIL=${EMAIL:-your@email.com}
-fi
-
-if [ "$EMAIL" = "your@email.com" ]; then
-    echo -e "${RED}Error: Please update EMAIL in .env file before running this script${NC}"
+if [ ! -f .env ]; then
+    echo -e "${RED}Error: .env file not found. Copy .env.example to .env and fill in DOMAIN and EMAIL${NC}"
     exit 1
 fi
+
+export $(cat .env | grep -v '#' | xargs)
+
+if [ -z "$DOMAIN" ]; then
+    echo -e "${RED}Error: DOMAIN is not set in .env${NC}"
+    exit 1
+fi
+
+if [ -z "$EMAIL" ] || [ "$EMAIL" = "your@email.com" ]; then
+    echo -e "${RED}Error: Please set a valid EMAIL in .env${NC}"
+    exit 1
+fi
+
+echo -e "Domain: ${GREEN}$DOMAIN${NC}"
+echo -e "Email:  ${GREEN}$EMAIL${NC}\n"
 
 mkdir -p ./certbot-conf ./certbot-www
 chmod 777 ./certbot-conf ./certbot-www
@@ -39,7 +45,7 @@ fi
 
 echo -e "${GREEN}✓ Ports cleared${NC}\n"
 
-echo -e "${YELLOW}Step 2: Requesting SSL certificate from Let's Encrypt (standalone mode)...${NC}\n"
+echo -e "${YELLOW}Step 2: Requesting SSL certificate from Let's Encrypt...${NC}\n"
 
 docker run --rm \
     -v "$(pwd)/certbot-conf:/etc/letsencrypt" \
@@ -57,14 +63,13 @@ if [ $? -eq 0 ]; then
     echo -e "\n${GREEN}✓ SSL certificate successfully obtained!${NC}\n"
 else
     echo -e "\n${RED}Error: Failed to obtain SSL certificate${NC}"
-    echo -e "${RED}Possible causes:${NC}"
     echo -e "  1. Domain is not pointing to your VPS IP"
     echo -e "  2. Port 80 is not accessible from the internet"
-    echo -e "  3. DNS has not propagated yet (try waiting 5-30 minutes)"
+    echo -e "  3. DNS has not propagated yet"
     exit 1
 fi
 
-echo -e "${YELLOW}Step 3: Starting full production stack with SSL certificate...${NC}\n"
+echo -e "${YELLOW}Step 3: Starting full production stack...${NC}\n"
 
 docker compose --profile production up -d
 
@@ -74,27 +79,13 @@ echo -e "${GREEN}✓ Production stack started${NC}\n"
 
 echo -e "${YELLOW}Verifying deployment...${NC}\n"
 
-if docker compose ps | grep -q "kultura-app.*running"; then
-    echo -e "${GREEN}✓ Kultura service is running${NC}"
-else
-    echo -e "${RED}✗ Kultura service is not running${NC}"
-fi
+for svc in kultura-app kultura-nginx kultura-certbot; do
+    if docker compose ps | grep -q "$svc.*running"; then
+        echo -e "${GREEN}✓ $svc is running${NC}"
+    else
+        echo -e "${RED}✗ $svc is not running${NC}"
+    fi
+done
 
-if docker compose ps | grep -q "nginx.*running"; then
-    echo -e "${GREEN}✓ Nginx service is running${NC}"
-else
-    echo -e "${RED}✗ Nginx service is not running${NC}"
-fi
-
-if docker compose ps | grep -q "certbot.*running"; then
-    echo -e "${GREEN}✓ Certbot service is running${NC}"
-else
-    echo -e "${RED}✗ Certbot service is not running${NC}"
-fi
-
-echo -e "\n${GREEN}=== Initialization Complete ===${NC}\n"
-echo -e "${YELLOW}Next steps:${NC}"
-echo -e "  1. Visit https://$DOMAIN to verify the certificate"
-echo -e "  2. Check logs: docker compose logs -f"
-echo -e "  3. Monitor certificate renewal: docker compose exec certbot certbot certificates"
-echo -e "\n${YELLOW}Your website should be live at https://$DOMAIN${NC}\n"
+echo -e "\n${GREEN}=== Initialization Complete ===${NC}"
+echo -e "Visit ${GREEN}https://$DOMAIN${NC} to verify\n"
