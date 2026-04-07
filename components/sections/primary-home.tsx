@@ -60,42 +60,54 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
             </p>
           </div>
 
-          {/* Carousel: 3 columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr_0.6fr] gap-5 mb-4 items-start">
-            {/* Left — tall image with < arrow */}
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-              <Image src={left.src} alt={left.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
+          {/* Carousel */}
+          <div className="flex flex-col lg:flex-row gap-5 mb-16">
+            {/* Col 1 — tall image with < arrow */}
+            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden lg:w-[42%] shrink-0">
+              <Image src={left.src} alt={left.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 42vw" />
               <button onClick={prev} className="absolute top-1/2 right-3 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-md" style={{ background: "var(--bg)", color: "var(--fg)" }} aria-label="Previous">
                 <ChevronLeft className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Center — shorter image + price card + details button */}
-            <div className="flex flex-col gap-4">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-                <Image src={center.src} alt={center.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 30vw" />
-              </div>
-              <div>
-                <p className="text-lg font-bold mb-1" style={{ color: "var(--fg)" }}>{t.price_label}</p>
-                <p className="text-sm mb-4 line-clamp-1" style={{ color: "var(--muted-fg)" }}>{t.description}</p>
-                <button className="w-full py-2.5 rounded-full text-sm font-medium border transition-colors" style={{ borderColor: "var(--border)", color: "var(--fg)" }}>
-                  {t.details_cta}
-                </button>
-              </div>
-            </div>
+            {/* Right side — col 2 + col 3 + description stacked */}
+            <div className="flex-1 flex flex-col gap-5">
+              {/* Row: center image+card & right image */}
+              <div className="flex flex-col sm:flex-row gap-5">
+                {/* Center — image + price card */}
+                <div className="flex flex-col gap-4 sm:w-3/5">
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                    <Image src={center.src} alt={center.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 30vw" />
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold mb-1" style={{ color: "var(--fg)" }}>{t.price_label}</p>
+                    <p className="text-sm mb-4 line-clamp-1" style={{ color: "var(--muted-fg)" }}>{t.description}</p>
+                    <button className="w-full py-2.5 rounded-full text-sm font-medium border transition-colors" style={{ borderColor: "var(--border)", color: "var(--fg)" }}>
+                      {t.details_cta}
+                    </button>
+                  </div>
+                </div>
 
-            {/* Right — tall image with < > arrows top-right */}
-            <div className="relative hidden lg:block">
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-                <Image src={right.src} alt={right.label} fill loading="lazy" className="object-cover" sizes="20vw" />
+                {/* Right — image with arrows */}
+                <div className="relative sm:w-2/5">
+                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                    <Image src={right.src} alt={right.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 20vw" />
+                  </div>
+                  <div className="absolute top-4 right-4 flex gap-2">
+                    <button onClick={prev} className="w-9 h-9 rounded-full border flex items-center justify-center transition-colors" style={{ borderColor: "var(--border)", color: "var(--fg)", background: "var(--bg)" }} aria-label="Previous">
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button onClick={next} className="w-9 h-9 rounded-full border flex items-center justify-center transition-colors" style={{ borderColor: "var(--border)", color: "var(--fg)", background: "var(--bg)" }} aria-label="Next">
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div className="absolute top-4 right-4 flex gap-2">
-                <button onClick={prev} className="w-9 h-9 rounded-full border flex items-center justify-center transition-colors" style={{ borderColor: "var(--border)", color: "var(--fg)", background: "var(--bg)" }} aria-label="Previous">
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button onClick={next} className="w-9 h-9 rounded-full border flex items-center justify-center transition-colors" style={{ borderColor: "var(--border)", color: "var(--fg)", background: "var(--bg)" }} aria-label="Next">
-                  <ChevronRight className="w-4 h-4" />
-                </button>
+
+              {/* Description — below col 2+3, beside col 1 */}
+              <div className="max-w-lg">
+                <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--muted-fg)" }}>{t.description}</p>
+                <p className="text-sm font-medium" style={{ color: "var(--fg)" }}>{t.sub_description}</p>
               </div>
             </div>
           </div>
@@ -109,12 +121,6 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-
-          {/* Bottom description */}
-          <m.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-2xl mb-16">
-            <m.p variants={fadeUp} className="text-sm leading-relaxed mb-2" style={{ color: "var(--muted-fg)" }}>{t.description}</m.p>
-            <m.p variants={fadeUp} className="text-sm font-medium" style={{ color: "var(--fg)" }}>{t.sub_description}</m.p>
-          </m.div>
 
           {/* Nearby landmarks */}
           <m.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}>
