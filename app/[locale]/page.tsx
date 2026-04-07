@@ -33,11 +33,11 @@ export default async function HomePage({
       <FAQSchema items={faqItems} />
       <Hero dict={dict} />
       <PrimaryHome dict={dict} />
+      <Testimonials dict={dict} />
       <Stats dict={dict} />
       <BestValue dict={dict} />
       <Explore dict={dict} />
       <FAQ dict={dict} />
-      <Testimonials dict={dict} />
       <CTA dict={dict} />
     </article>
   );
