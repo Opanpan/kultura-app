@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useCallback } from "react";
-import { m, LazyMotion } from "framer-motion";
+import { m, LazyMotion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fadeUp, stagger } from "@/lib/animations";
 import type { Dictionary } from "@/app/[locale]/dictionaries";
@@ -88,10 +88,21 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
                   </div>
                 </div>
 
-                {/* Right — image with arrows */}
+                {/* Right — image with arrows + animation */}
                 <div className="relative sm:w-2/5">
                   <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-                    <Image src={right.src} alt={right.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 20vw" />
+                    <AnimatePresence mode="popLayout">
+                      <m.div
+                        key={right.src}
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                        className="absolute inset-0"
+                      >
+                        <Image src={right.src} alt={right.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 20vw" />
+                      </m.div>
+                    </AnimatePresence>
                   </div>
                   <div className="absolute top-4 right-4 flex gap-2">
                     <button onClick={prev} className="w-9 h-9 rounded-full border flex items-center justify-center transition-colors" style={{ borderColor: "var(--border)", color: "var(--fg)", background: "var(--bg)" }} aria-label="Previous">
