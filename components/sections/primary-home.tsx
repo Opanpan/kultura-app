@@ -38,10 +38,12 @@ function getSlides(idx: number) {
 
 export default function PrimaryHome({ dict }: { dict: Dictionary }) {
   const t = dict.primary;
-  const [idx, setIdx] = useState(0);
-  const prev = useCallback(() => setIdx((i) => (i - 1 + projects.length) % projects.length), []);
-  const next = useCallback(() => setIdx((i) => (i + 1) % projects.length), []);
-  const { left, center, right } = getSlides(idx);
+  const [rightIdx, setRightIdx] = useState(2);
+  const prev = useCallback(() => setRightIdx((i) => (i - 1 + projects.length) % projects.length), []);
+  const next = useCallback(() => setRightIdx((i) => (i + 1) % projects.length), []);
+  const left = projects[0];
+  const center = projects[1];
+  const right = projects[rightIdx];
 
   return (
     <LazyMotion features={loadFeatures} strict>
