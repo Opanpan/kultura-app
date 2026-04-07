@@ -12,6 +12,7 @@ services:
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - ./proxy.conf:/etc/nginx/conf.d/custom-proxy.conf:ro
+      - ./kultura-development.kinderheim511.com_location:/etc/nginx/vhost.d/kultura-development.kinderheim511.com_location:ro
       - /home/ubuntu/home/kultura-app/public/images:/usr/share/nginx/static/images:ro
       - /home/ubuntu/home/kultura-app/public/videos:/usr/share/nginx/static/videos:ro
     networks:
