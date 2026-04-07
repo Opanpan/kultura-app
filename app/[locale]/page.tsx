@@ -8,6 +8,7 @@ import BestValue from "@/components/sections/best-value";
 import Explore from "@/components/sections/explore";
 import FAQ from "@/components/sections/faq";
 import Testimonials from "@/components/sections/testimonials";
+import Products from "@/components/sections/products";
 import CTA from "@/components/sections/cta";
 
 export default async function HomePage({
@@ -34,6 +35,7 @@ export default async function HomePage({
       <Hero dict={dict} />
       <PrimaryHome dict={dict} />
       <Testimonials dict={dict} />
+      <Products dict={dict} />
       <Stats dict={dict} />
       <BestValue dict={dict} />
       <Explore dict={dict} />
