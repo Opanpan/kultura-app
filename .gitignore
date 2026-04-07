@@ -45,3 +45,6 @@ certbot-www/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Videos — serve from VPS directly
+public/videos/
