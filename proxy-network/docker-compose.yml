@@ -12,6 +12,8 @@ services:
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - ./proxy.conf:/etc/nginx/conf.d/custom-proxy.conf:ro
+      - /home/ubuntu/home/kultura-app/public/images:/usr/share/nginx/static/images:ro
+      - /home/ubuntu/home/kultura-app/public/videos:/usr/share/nginx/static/videos:ro
     networks:
       - proxy-network
 
