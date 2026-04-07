@@ -19,7 +19,7 @@ export default function Hero({ dict }: { dict: Dictionary }) {
           fill
           priority
           fetchPriority="high"
-          quality={80}
+          quality={75}
           className="object-cover"
           sizes="100vw"
         />
