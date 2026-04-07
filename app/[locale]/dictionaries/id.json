@@ -86,7 +86,12 @@
   "testimonials": {
     "title": "Apa kata klien kami tentang kami",
     "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan, dan panduan ahli—mendukung Anda di setiap langkah.",
-    "quote": "Platform properti yang luar biasa dengan listing terverifikasi dan transparansi penuh. Tim membimbing kami secara profesional dari awal hingga akhir, membuat seluruh proses pembelian lancar dan bebas stres."
+    "quote_1": "Tertarik sama matana, designnya cocok, lokasinya strategis deket banget sama stasiun",
+    "name_1": "Willy & Istri",
+    "quote_2": "Deket Fasilitas umum, stasiun terutama yang pergunakan setiap hari untuk kerja",
+    "name_2": "Gilang & Istri",
+    "quote_3": "Lingkungannya masih asri, terus juga aksesnya bagus, mudah diakses, stasiun jadi point plus buat aku, karna buat aku kerja naik krl",
+    "name_3": "Widial"
   },
   "cta": {
     "title_1": "Siap mewujudkan properti",

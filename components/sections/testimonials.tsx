@@ -9,30 +9,23 @@ import type { Dictionary } from "@/app/[locale]/dictionaries";
 
 const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default);
 
-const testimonials = [
-  {
-    image: "/images/testimonials/willy.webp",
-    quote: "Tertarik sama matana, designnya cocok, lokasinya strategis deket banget sama stasiun",
-    name: "Willy & Istri",
-  },
-  {
-    image: "/images/testimonials/gilang.webp",
-    quote: "Deket Fasilitas umum, stasiun terutama yang pergunakan setiap hari untuk kerja",
-    name: "Gilang & Istri",
-  },
-  {
-    image: "/images/testimonials/widia.webp",
-    quote: "Lingkungannya masih asri, terus juga aksesnya bagus, mudah diakses, stasiun jadi point plus buat aku, karna buat aku kerja naik krl",
-    name: "Widial",
-  },
+const images = [
+  "/images/testimonials/willy.webp",
+  "/images/testimonials/gilang.webp",
+  "/images/testimonials/widia.webp",
 ];
 
 export default function Testimonials({ dict }: { dict: Dictionary }) {
   const t = dict.testimonials;
+  const items = [
+    { image: images[0], quote: t.quote_1, name: t.name_1 },
+    { image: images[1], quote: t.quote_2, name: t.name_2 },
+    { image: images[2], quote: t.quote_3, name: t.name_3 },
+  ];
   const [idx, setIdx] = useState(0);
-  const prev = useCallback(() => setIdx((i) => (i - 1 + testimonials.length) % testimonials.length), []);
-  const next = useCallback(() => setIdx((i) => (i + 1) % testimonials.length), []);
-  const current = testimonials[idx];
+  const prev = useCallback(() => setIdx((i) => (i - 1 + items.length) % items.length), [items.length]);
+  const next = useCallback(() => setIdx((i) => (i + 1) % items.length), [items.length]);
+  const current = items[idx];
 
   // Auto-advance every 6s
   useEffect(() => {
@@ -112,7 +105,7 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
 
               {/* Dots */}
               <div className="flex gap-2 mt-8">
-                {testimonials.map((_, i) => (
+                {items.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setIdx(i)}

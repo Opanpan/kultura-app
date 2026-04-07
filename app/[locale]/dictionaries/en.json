@@ -86,7 +86,12 @@
   "testimonials": {
     "title": "What our clients say about us",
     "description": "We connect buyers and sellers through a trusted platform with verified properties, transparent deals, and expert guidance—supporting you at every step.",
-    "quote": "An excellent real estate platform with verified listings and complete transparency. The team guided us professionally from start to finish, making the entire buying process smooth and stress-free."
+    "quote_1": "Interested in Matana, the design fits perfectly, the location is strategic and very close to the station",
+    "name_1": "Willy & Wife",
+    "quote_2": "Close to public facilities, especially the station which I use every day for work",
+    "name_2": "Gilang & Wife",
+    "quote_3": "The environment is still green, the access is great and easy to reach, the station is a plus point for me since I commute by KRL for work",
+    "name_3": "Widial"
   },
   "cta": {
     "title_1": "Ready to make your Dream",
