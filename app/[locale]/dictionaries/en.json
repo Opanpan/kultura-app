@@ -86,12 +86,15 @@
   "testimonials": {
     "title": "What our clients say about us",
     "description": "We connect buyers and sellers through a trusted platform with verified properties, transparent deals, and expert guidance—supporting you at every step.",
-    "quote_1": "Interested in Matana, the design fits perfectly, the location is strategic and very close to the station",
-    "name_1": "Willy & Wife",
-    "quote_2": "Close to public facilities, especially the station which I use every day for work",
-    "name_2": "Gilang & Wife",
-    "quote_3": "The environment is still green, the access is great and easy to reach, the station is a plus point for me since I commute by KRL for work",
-    "name_3": "Widial"
+    "quote_1": "Interested in Matano, the design fits perfectly, the location is strategic and very close to the station",
+    "name_1": "Rifqi & Emma",
+    "project_1": "Innari",
+    "quote_2": "Close to public facilities, especially the station which we use every day for work",
+    "name_2": "Emir & Rasya",
+    "project_2": "Matano Boulevard",
+    "quote_3": "The environment is still green, the access is great, the station is a plus point since I commute by KRL for work",
+    "name_3": "Gilang & Jane",
+    "project_3": "New Abaya Village"
   },
   "cta": {
     "title_1": "Ready to make your Dream",

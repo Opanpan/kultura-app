@@ -86,12 +86,15 @@
   "testimonials": {
     "title": "Apa kata klien kami tentang kami",
     "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan, dan panduan ahli—mendukung Anda di setiap langkah.",
-    "quote_1": "Tertarik sama matana, designnya cocok, lokasinya strategis deket banget sama stasiun",
-    "name_1": "Willy & Istri",
-    "quote_2": "Deket Fasilitas umum, stasiun terutama yang pergunakan setiap hari untuk kerja",
-    "name_2": "Gilang & Istri",
-    "quote_3": "Lingkungannya masih asri, terus juga aksesnya bagus, mudah diakses, stasiun jadi point plus buat aku, karna buat aku kerja naik krl",
-    "name_3": "Widial"
+    "quote_1": "Tertarik sama Matano, designnya cocok, lokasinya strategis deket banget sama stasiun",
+    "name_1": "Rifqi & Emma",
+    "project_1": "Innari",
+    "quote_2": "Deket fasilitas umum, stasiun terutama yang kami gunakan setiap hari untuk kerja",
+    "name_2": "Emir & Rasya",
+    "project_2": "Matano Boulevard",
+    "quote_3": "Lingkungannya masih asri, aksesnya bagus, stasiun jadi point plus buat aku karena kerja naik KRL",
+    "name_3": "Gilang & Jane",
+    "project_3": "New Abaya Village"
   },
   "cta": {
     "title_1": "Siap mewujudkan properti",

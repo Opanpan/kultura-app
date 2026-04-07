@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { m, LazyMotion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Play, Pause, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { fadeUp, stagger } from "@/lib/animations";
 import type { Dictionary } from "@/app/[locale]/dictionaries";
 
@@ -15,6 +15,70 @@ const images = [
   "/images/testimonials/widia.webp",
 ];
 
+const videos = [
+  "/videos/testimoni-rifqi.mp4",
+  "/videos/testimoni-emir.mp4",
+  "/videos/testimoni-gilang.mp4",
+];
+
+// ── Video player sub-component ──────────────────────────────────────────────
+function VideoPlayer({ src, name, project }: { src: string; name: string; project: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const toggle = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) { v.play(); setPlaying(true); }
+    else { v.pause(); setPlaying(false); }
+  };
+
+  const handleTimeUpdate = () => {
+    const v = videoRef.current;
+    if (v && v.duration) setProgress((v.currentTime / v.duration) * 100);
+  };
+
+  return (
+    <div className="relative rounded-2xl overflow-hidden bg-black aspect-[9/16] cursor-pointer group" onClick={toggle}>
+      <video
+        ref={videoRef}
+        src={src}
+        className="w-full h-full object-cover"
+        playsInline
+        preload="metadata"
+        onTimeUpdate={handleTimeUpdate}
+        onEnded={() => setPlaying(false)}
+      />
+
+      {/* Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+
+      {/* Progress bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/20">
+        <div className="h-full bg-white transition-all duration-200" style={{ width: `${progress}%` }} />
+      </div>
+
+      {/* Play/Pause overlay */}
+      <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${playing ? "opacity-0 group-hover:opacity-100" : "opacity-100"}`}>
+        <div className="w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-md" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)" }}>
+          {playing
+            ? <Pause className="w-5 h-5 text-white fill-white" />
+            : <Play className="w-5 h-5 text-white fill-white ml-0.5" />
+          }
+        </div>
+      </div>
+
+      {/* Name tag */}
+      <div className="absolute bottom-4 left-4">
+        <p className="text-white font-semibold text-sm leading-tight">{name}</p>
+        <p className="text-white/60 text-xs mt-0.5">{project}</p>
+      </div>
+    </div>
+  );
+}
+
+// ── Main component ───────────────────────────────────────────────────────────
 export default function Testimonials({ dict }: { dict: Dictionary }) {
   const t = dict.testimonials;
   const items = [
@@ -22,12 +86,17 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
     { image: images[1], quote: t.quote_2, name: t.name_2 },
     { image: images[2], quote: t.quote_3, name: t.name_3 },
   ];
+  const videoItems = [
+    { src: videos[0], name: t.name_1, project: t.project_1 },
+    { src: videos[1], name: t.name_2, project: t.project_2 },
+    { src: videos[2], name: t.name_3, project: t.project_3 },
+  ];
+
   const [idx, setIdx] = useState(0);
   const prev = useCallback(() => setIdx((i) => (i - 1 + items.length) % items.length), [items.length]);
   const next = useCallback(() => setIdx((i) => (i + 1) % items.length), [items.length]);
   const current = items[idx];
 
-  // Auto-advance every 6s
   useEffect(() => {
     const timer = setInterval(next, 6000);
     return () => clearInterval(timer);
@@ -53,7 +122,7 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
             </m.p>
           </m.div>
 
-          {/* Testimonial card */}
+          {/* ── Original testimonial card (unchanged) ── */}
           <div className="relative max-w-5xl mx-auto flex flex-col md:flex-row items-stretch rounded-3xl overflow-hidden min-h-[400px]" style={{ background: "var(--card)" }}>
             {/* Image side */}
             <div className="relative w-full md:w-1/2 min-h-[300px] md:min-h-0 overflow-hidden">
@@ -70,10 +139,8 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                 </m.div>
               </AnimatePresence>
 
-              {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-black/10" />
 
-              {/* Nav arrows */}
               <div className="absolute bottom-4 left-4 flex gap-2 z-10">
                 <button onClick={prev} className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95" aria-label="Previous testimonial">
                   <ChevronLeft className="w-4 h-4 text-neutral-900" />
@@ -103,7 +170,6 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                 </m.div>
               </AnimatePresence>
 
-              {/* Dots */}
               <div className="flex gap-2 mt-8">
                 {items.map((_, i) => (
                   <button
@@ -112,7 +178,7 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                     className="h-1.5 rounded-full transition-all duration-300"
                     style={{
                       width: i === idx ? 24 : 8,
-                      background: i === idx ? "var(--bg)" : "var(--bg)",
+                      background: "var(--bg)",
                       opacity: i === idx ? 1 : 0.3,
                     }}
                     aria-label={`Testimonial ${i + 1}`}
@@ -121,6 +187,27 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
               </div>
             </div>
           </div>
+
+          {/* ── Video testimonials ── */}
+          <m.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="mt-16"
+          >
+            <m.p variants={fadeUp} className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "var(--muted-fg)" }}>
+              Video Testimonials
+            </m.p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {videoItems.map((v, i) => (
+                <m.div key={i} variants={fadeUp}>
+                  <VideoPlayer src={v.src} name={v.name} project={v.project} />
+                </m.div>
+              ))}
+            </div>
+          </m.div>
+
         </div>
       </section>
     </LazyMotion>
