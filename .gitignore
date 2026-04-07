@@ -48,3 +48,6 @@ next-env.d.ts
 
 # Videos — serve from VPS directly
 public/videos/
+
+# Static assets — served directly from VPS via Nginx
+public/images/
