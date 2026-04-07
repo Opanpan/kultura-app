@@ -38,12 +38,13 @@ function getSlides(idx: number) {
 
 export default function PrimaryHome({ dict }: { dict: Dictionary }) {
   const t = dict.primary;
-  const [rightIdx, setRightIdx] = useState(2);
-  const prev = useCallback(() => setRightIdx((i) => (i - 1 + projects.length) % projects.length), []);
-  const next = useCallback(() => setRightIdx((i) => (i + 1) % projects.length), []);
+  const [rightIdx, setRightIdx] = useState(0);
+  const carouselImages = projects.slice(2); // exclude col 1 & 2
+  const prev = useCallback(() => setRightIdx((i) => (i - 1 + carouselImages.length) % carouselImages.length), [carouselImages.length]);
+  const next = useCallback(() => setRightIdx((i) => (i + 1) % carouselImages.length), [carouselImages.length]);
   const left = projects[0];
   const center = projects[1];
-  const right = projects[rightIdx];
+  const right = carouselImages[rightIdx];
 
   return (
     <LazyMotion features={loadFeatures} strict>
@@ -62,12 +63,9 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
 
           {/* Carousel */}
           <div className="flex flex-col lg:flex-row gap-5 mb-16">
-            {/* Col 1 — tall image with < arrow */}
+            {/* Col 1 — tall image */}
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden lg:w-[42%] shrink-0">
               <Image src={left.src} alt={left.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 42vw" />
-              <button onClick={prev} className="absolute top-1/2 right-3 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-md" style={{ background: "var(--bg)", color: "var(--fg)" }} aria-label="Previous">
-                <ChevronLeft className="w-4 h-4" />
-              </button>
             </div>
 
             {/* Right side — col 2 + col 3 + description stacked */}
