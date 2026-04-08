@@ -59,10 +59,10 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
             <ThemeToggle scrolled={scrolled} />
             <Link
               href={`/${locale === "en" ? "id" : "en"}`}
-              className={`flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium uppercase transition-colors duration-300 ${
+              className={`flex items-center justify-center w-11 h-11 rounded-full text-xs font-medium uppercase transition-colors duration-300 ${
                 scrolled ? "bg-[var(--muted)] text-[var(--muted-fg)] hover:text-[var(--fg)]" : "bg-white/15 text-white/70 hover:text-white"
               }`}
-              aria-label="Switch language"
+              aria-label={`Switch to ${locale === "en" ? "Indonesian" : "English"}`}
             >
               {locale === "en" ? "ID" : "EN"}
             </Link>

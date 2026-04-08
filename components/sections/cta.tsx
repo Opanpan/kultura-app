@@ -25,7 +25,7 @@ export default function CTA({ dict }: { dict: Dictionary }) {
             {t.title_2}
           </h2>
           <p className="text-sm mb-8 max-w-lg mx-auto leading-relaxed opacity-60">{t.description}</p>
-          <button className="font-medium px-8 py-3.5 rounded-full transition-colors text-sm" style={{ background: "var(--bg)", color: "var(--fg)" }}>
+          <button className="font-medium px-8 py-3.5 rounded-full transition-colors text-sm min-h-[44px] min-w-[44px]" style={{ background: "var(--bg)", color: "var(--fg)" }} aria-label={t.button}>
             {t.button}
           </button>
         </m.div>

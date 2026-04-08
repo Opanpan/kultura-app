@@ -24,12 +24,12 @@ export default function ThemeToggle({ scrolled = false }: { scrolled?: boolean }
   return (
     <button
       onClick={toggle}
-      className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-300 ${
+      className={`flex items-center justify-center w-11 h-11 rounded-full transition-colors duration-300 ${
         scrolled
           ? "bg-[var(--muted)] text-[var(--muted-fg)] hover:text-[var(--fg)]"
           : "bg-white/15 text-white/70 hover:text-white"
       }`}
-      aria-label="Toggle theme"
+      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
     </button>

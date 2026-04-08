@@ -49,18 +49,24 @@ export default function FAQ({ dict }: { dict: Dictionary }) {
               <m.div key={i} variants={fadeUp} style={{ borderBottom: "1px solid var(--border)" }}>
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-                  className="w-full flex items-center justify-between py-5 text-left"
+                  className="w-full flex items-center justify-between py-5 text-left min-h-[44px]"
                   aria-expanded={openIndex === i}
+                  aria-controls={`faq-answer-${i}`}
+                  id={`faq-question-${i}`}
                 >
                   <span className="text-sm font-medium pr-4" style={{ color: "var(--fg)" }}>{item.q}</span>
                   <ChevronDown
                     className={`w-5 h-5 shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`}
                     style={{ color: "var(--muted-fg)" }}
+                    aria-hidden="true"
                   />
                 </button>
                 <AnimatePresence initial={false}>
                   {openIndex === i && (
                     <m.div
+                      id={`faq-answer-${i}`}
+                      role="region"
+                      aria-labelledby={`faq-question-${i}`}
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}

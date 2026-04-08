@@ -80,7 +80,7 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
                   <div>
                     <p className="text-lg font-bold mb-1" style={{ color: "var(--fg)" }}>{t.price_label}</p>
                     <p className="text-sm mb-4 line-clamp-1" style={{ color: "var(--muted-fg)" }}>{t.description}</p>
-                    <button className="w-full py-2.5 rounded-full text-sm font-medium border transition-colors" style={{ borderColor: "var(--border)", color: "var(--fg)" }}>
+                    <button className="w-full py-2.5 rounded-full text-sm font-medium border transition-colors min-h-[44px]" style={{ borderColor: "var(--border)", color: "var(--fg)" }} aria-label={t.details_cta}>
                       {t.details_cta}
                     </button>
                   </div>

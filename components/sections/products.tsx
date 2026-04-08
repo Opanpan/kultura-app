@@ -79,8 +79,8 @@ function Lightbox({ product, startIdx, onClose }: {
       onClick={onClose}
     >
       <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute -top-12 right-0 w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.1)" }}>
-          <X className="w-4 h-4 text-white" />
+        <button onClick={onClose} className="absolute -top-12 right-0 w-11 h-11 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.1)" }} aria-label="Close">
+          <X className="w-4 h-4 text-white" aria-hidden="true" />
         </button>
 
         <m.div key={idx} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}
@@ -105,11 +105,11 @@ function Lightbox({ product, startIdx, onClose }: {
           ))}
         </div>
 
-        <button onClick={prev} className="absolute left-0 top-[45%] -translate-x-14 w-11 h-11 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>
-          <ChevronLeft className="w-5 h-5 text-white" />
+        <button onClick={prev} className="absolute left-0 top-[45%] -translate-x-14 w-11 h-11 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }} aria-label="Previous image">
+          <ChevronLeft className="w-5 h-5 text-white" aria-hidden="true" />
         </button>
-        <button onClick={next} className="absolute right-0 top-[45%] translate-x-14 w-11 h-11 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>
-          <ChevronRight className="w-5 h-5 text-white" />
+        <button onClick={next} className="absolute right-0 top-[45%] translate-x-14 w-11 h-11 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }} aria-label="Next image">
+          <ChevronRight className="w-5 h-5 text-white" aria-hidden="true" />
         </button>
       </div>
     </m.div>
@@ -178,9 +178,10 @@ export default function Products({ dict }: { dict: Dictionary }) {
                 </div>
 
                 {/* Expand hint */}
-                <div className="absolute top-5 right-5 w-9 h-9 rounded-full flex items-center justify-center"
-                  style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)" }}>
-                  <ArrowUpRight className="w-4 h-4 text-white" />
+                <div className="absolute top-5 right-5 w-11 h-11 rounded-full flex items-center justify-center"
+                  style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)" }}
+                  aria-hidden="true">
+                  <ArrowUpRight className="w-4 h-4 text-white" aria-hidden="true" />
                 </div>
 
                 {/* Bottom info */}
@@ -247,7 +248,7 @@ export default function Products({ dict }: { dict: Dictionary }) {
                     </div>
 
                     {/* Arrow */}
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200"
+                    <div className="w-11 h-11 rounded-full flex items-center justify-center shrink-0 transition-all duration-200"
                       style={{
                         background: isActive ? "var(--fg)" : "transparent",
                         opacity: isActive ? 1 : 0,
