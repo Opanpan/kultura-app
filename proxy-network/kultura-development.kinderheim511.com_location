@@ -1,5 +1,6 @@
-# Serve images and videos as static files directly from Nginx
-location ~* ^/(images|videos)/ {
+# Videos only — serve directly from Nginx with range request support
+# Images go through Next.js /_next/image for optimization (resize + webp/avif)
+location ~* ^/videos/ {
     root /usr/share/nginx/static;
     add_header Cache-Control "public, max-age=2592000, immutable";
     add_header Accept-Ranges bytes;
