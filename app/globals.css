@@ -9,7 +9,7 @@
   --muted-fg: #737373;
   --border: #e5e5e5;
   --card: #ffffff;
-  --font-sans: var(--font-jakarta);
+  --font-sans: var(--font-outfit);
 }
 
 .dark {
@@ -49,4 +49,13 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
