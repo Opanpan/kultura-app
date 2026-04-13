@@ -1,13 +1,12 @@
 {
   "nav": {
     "home": "Beranda",
-    "about": "Tentang",
-    "property": "Properti",
-    "service": "Layanan",
-    "faq": "FAQ",
-    "blog": "Blog",
-    "contact": "Kontak",
-    "login": "Masuk"
+    "about": "Tentang Kami",
+    "projects": "Proyek",
+    "testimonials": "Testimoni",
+    "location": "Lokasi",
+    "reviews": "Ulasan",
+    "contact": "Kontak"
   },
   "hero": {
     "badge_home": "Beranda",
@@ -58,16 +57,88 @@
     "cities_count": "20+",
     "total_count": ""
   },
+  "testimonials": {
+    "title": "Cerita nyata dari mereka.",
+    "description": "Bagaimana rumah ini benar-benar menjadi pilihan mereka?",
+    "sub_description": "Terkadang kebahagian itu terlihat dari hal kecil yang mereka ceritakan",
+    "whatsapp_cta": "Hubungi via WhatsApp",
+    "video_label": "Video Testimoni",
+    "quote_1": "Tertarik sama Matano, designnya cocok, lokasinya strategis deket banget sama stasiun",
+    "name_1": "Rifqi & Emma",
+    "project_1": "Innari",
+    "quote_2": "Deket fasilitas umum, stasiun terutama yang kami gunakan setiap hari untuk kerja",
+    "name_2": "Emir & Rasya",
+    "project_2": "Matano Boulevard",
+    "quote_3": "Lingkungannya masih asri, aksesnya bagus, stasiun jadi point plus buat aku karena kerja naik KRL",
+    "name_3": "Gilang & Jane",
+    "project_3": "New Abaya Village"
+  },
+  "products": {
+    "label": "Proyek Kami",
+    "title": "Setiap hunian dibuat untuk mengisi cerita yang berbeda",
+    "subtitle": "Dirancang untuk mengikuti perjalanan hidup yang terus berkembang.",
+    "whatsapp_cta": "Hubungi via WhatsApp",
+    "price_prefix": "Mulai dari"
+  },
+  "explore": {
+    "title": "Lebih dekat kemana-mana, lebih banyak waktu yang berarti",
+    "description": "Akses yang mempermudah untuk hidup yang lebih tenang",
+    "sub_description": "Cisauk terus berkembang, dan lokasinya yang berdampingan dengan BSD yang membuat kawasan ini semakin relevan di masa depan.",
+    "radius": "Radius 5 KM",
+    "landmark_1": "Stasiun Cisauk",
+    "landmark_1_distance": "1.2 km",
+    "landmark_1_time": "3 menit",
+    "landmark_2": "Gerbang Toll Serbaraja",
+    "landmark_2_distance": "2.5 km",
+    "landmark_2_time": "5 menit",
+    "landmark_3": "AEON Mall BSD",
+    "landmark_3_distance": "4.2 km",
+    "landmark_3_time": "10 menit",
+    "landmark_4": "Universitas Multimedia Nusantara",
+    "landmark_4_distance": "3.8 km",
+    "landmark_4_time": "8 menit",
+    "landmark_5": "ICE BSD",
+    "landmark_5_distance": "4.5 km",
+    "landmark_5_time": "12 menit"
+  },
   "bestValue": {
     "title": "Temukan Properti dengan Nilai Terbaik",
     "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan.",
     "cta": "Temukan Properti Terdekat"
   },
-  "explore": {
-    "title": "Jelajahi Rumah Tersedia di Dekat Lokasi Anda",
-    "description": "Temukan permata tersembunyi di lingkungan Anda. Rumah impian Anda lebih dekat dari yang Anda kira. Jelajahi rumah-rumah indah dengan desain modern dan komunitas yang nyaman.",
-    "card_title": "Golden Resilience London USA",
-    "card_price": "$533367"
+  "about": {
+    "label": "Tentang Kami",
+    "title": "We Build Happiness through inspiring property craftsmanship",
+    "description": "Kultura Properties lahir dari keyakinan bahwa rumah bukan sekadar produk, tapi bagian dari kehidupan yang dijalani setiap hari. Sejak awal, kami tidak melihat pengembangan hunian sebagai sesuatu yang instan. Setiap proyek dimulai dari proses memahami pasar, membaca kebutuhan, dan memastikan bahwa apa yang kami bangun benar-benar relevan untuk jangka panjang dan menciptakan kebahagiaan. Dengan pengalaman lebih dari dua dekade, kami telah mengembangkan ratusan hektare kawasan dan menghadirkan ribuan unit hunian yang kini sudah dihuni dan menjadi bagian dari cerita banyak keluarga. Bagi kami, membangun bukan hanya soal menyelesaikan proyek, tapi tentang membuat tempat yang nyaman untuk ditinggali, masuk akal untuk dimiliki, dan menciptakan kebahagiaan.",
+    "sub_description": "Kultura Properties percaya bahwa kebahagiaan dalam hunian lahir dari kualitas perencanaan, perhatian pada detail dan eksekusi terbaik dalam setiap proses pengembangan"
+  },
+  "reviews": {
+    "title": "Apa kata Mereka yang sudah lebih dulu memilih?",
+    "description": "Bukan sekadar penilaian, tapi pengalaman nyata yang dibagikan secara jujur.",
+    "review_1": "Prosesnya transparan dari awal, nggak ada biaya tersembunyi. Rumahnya sesuai ekspektasi.",
+    "review_1_name": "Andi & Sari",
+    "review_1_project": "Cluster Fontana",
+    "review_1_rating": "5",
+    "review_2": "Lokasi deket stasiun jadi nilai plus banget. Tiap hari commute ke Jakarta jadi gampang.",
+    "review_2_name": "Budi Hartono",
+    "review_2_project": "Matano Boulevard",
+    "review_2_rating": "5",
+    "review_3": "Desainnya modern, ventilasi bagus, dan lingkungannya tenang. Anak-anak betah main di taman.",
+    "review_3_name": "Dewi & Raka",
+    "review_3_project": "New Abaya Village",
+    "review_3_rating": "5",
+    "review_4": "Harganya masuk akal untuk kualitas yang didapat. Developer-nya juga responsif.",
+    "review_4_name": "Fajar Nugroho",
+    "review_4_project": "Cluster Innari",
+    "review_4_rating": "5",
+    "review_5": "Sudah 2 tahun tinggal di sini, lingkungannya makin berkembang dan nyaman.",
+    "review_5_name": "Lina & Dimas",
+    "review_5_project": "New Maninjau",
+    "review_5_rating": "4",
+    "review_6": "Akses toll dan stasiun deket, fasilitas lengkap. Keputusan terbaik buat keluarga kami.",
+    "review_6_name": "Rizky & Ayu",
+    "review_6_project": "Matano Boulevard",
+    "review_6_rating": "5"
   },
   "faq": {
     "title": "Pertanyaan yang Sering Diajukan",
@@ -83,29 +154,20 @@
     "q5": "Apakah Anda menangani properti residensial dan komersial?",
     "a5": "Ya, kami menangani berbagai jenis properti termasuk residensial, komersial, dan tanah."
   },
-  "testimonials": {
-    "title": "Apa kata klien kami tentang kami",
-    "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan, dan panduan ahli—mendukung Anda di setiap langkah.",
-    "quote_1": "Tertarik sama Matano, designnya cocok, lokasinya strategis deket banget sama stasiun",
-    "name_1": "Rifqi & Emma",
-    "project_1": "Innari",
-    "quote_2": "Deket fasilitas umum, stasiun terutama yang kami gunakan setiap hari untuk kerja",
-    "name_2": "Emir & Rasya",
-    "project_2": "Matano Boulevard",
-    "quote_3": "Lingkungannya masih asri, aksesnya bagus, stasiun jadi point plus buat aku karena kerja naik KRL",
-    "name_3": "Gilang & Jane",
-    "project_3": "New Abaya Village"
-  },
   "cta": {
-    "title_1": "Siap mewujudkan properti",
-    "title_2": "impian Anda",
-    "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan, dan panduan ahli—mendukung Anda di setiap langkah.",
-    "button": "Mulai Sekarang"
+    "title": "Happiness starts from your home",
+    "whatsapp_cta": "Hubungi via WhatsApp"
   },
   "footer": {
-    "discover": "Temukan Keajaiban Alam dengan Panduan Ahli",
-    "description": "Kami menghubungkan pembeli dan penjual melalui platform terpercaya dengan properti terverifikasi, transaksi transparan, dan panduan ahli—mendukung Anda di setiap langkah.",
-    "rights": "2024 Kultura Inc. Hak Cipta Dilindungi.",
+    "tagline": "Happiness starts from your home",
+    "description": "Kultura Properties membangun hunian yang relevan, nyaman, dan menciptakan kebahagiaan untuk jangka panjang.",
+    "nav_label": "Navigasi",
+    "contact_label": "Hubungi Kami",
+    "phone": "+62 812-3456-7890",
+    "email": "hello@kulturaproperties.com",
+    "address": "Cisauk, Tangerang, Banten",
+    "social_label": "Ikuti Kami",
+    "rights": "© {year} Kultura Properties. Hak Cipta Dilindungi.",
     "terms": "Syarat & Ketentuan",
     "privacy": "Kebijakan Privasi"
   }
