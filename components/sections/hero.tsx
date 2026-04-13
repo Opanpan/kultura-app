@@ -12,7 +12,7 @@ export default function Hero({ dict }: { dict: Dictionary }) {
 
   return (
     <LazyMotion features={loadFeatures} strict>
-      <section className="relative min-h-screen overflow-hidden flex flex-col justify-center lg:justify-end pb-0 lg:pb-12">
+      <section className="relative min-h-screen overflow-hidden flex flex-col justify-center lg:justify-end pb-0 lg:pb-12" id="hero">
         <Image
           src="/images/hero-bg.webp"
           alt=""
