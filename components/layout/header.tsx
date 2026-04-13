@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { m, LazyMotion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -8,11 +9,27 @@ import ThemeToggle from "@/components/ui/theme-toggle";
 import type { Dictionary, Locale } from "@/app/[locale]/dictionaries";
 
 const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default);
-const navLinks = ["home", "about", "property", "service", "faq", "blog", "contact"] as const;
+const navLinks = [
+  { key: "home", href: "#hero" },
+  { key: "testimonials", href: "#testimonials" },
+  { key: "projects", href: "#products" },
+  { key: "location", href: "#explore" },
+  { key: "about", href: "#about" },
+  { key: "reviews", href: "#reviews" },
+  { key: "contact", href: "#cta" },
+] as const;
+
+const sectionIds = navLinks.map((l) => l.href.slice(1));
 
 export default function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("hero");
+
+  const scrollTo = (href: string) => {
+    const el = document.getElementById(href.slice(1));
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -20,17 +37,39 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Track active section via IntersectionObserver
+  useEffect(() => {
+    const els = sectionIds.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    if (!els.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
+    );
+
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
+  const activeKey = navLinks.find((l) => l.href === `#${active}`)?.key ?? "home";
+
   return (
     <LazyMotion features={loadFeatures} strict>
       <header className="fixed top-0 inset-x-0 z-50">
         <div className="mx-auto max-w-[1400px] px-6 pt-4 flex items-center justify-between">
-          <Link href={`/${locale}`} className={`text-sm whitespace-nowrap transition-colors duration-300 ${scrolled && !open ? "text-[var(--fg)]" : "text-white/80"}`}>
-            Logo Here
+          <Link href={`/${locale}`} className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${scrolled ? "bg-[var(--muted)]" : "bg-white/15"}`}>
+            <Image src={scrolled ? "/images/logo-black.png" : "/images/logo-white.png"} alt="Kultura Properties" width={28} height={28} className="dark:hidden" />
+            <Image src="/images/logo-white.png" alt="Kultura Properties" width={28} height={28} className="hidden dark:block" />
           </Link>
 
           <nav
@@ -40,19 +79,32 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
                 : "bg-white/10 border-white/15"
             }`}
           >
-            {navLinks.map((key) => (
-              <Link
-                key={key}
-                href={`/${locale}`}
-                className={`px-5 py-1.5 rounded-full text-sm transition-colors duration-300 ${
-                  key === "home"
-                    ? scrolled ? "bg-[var(--fg)] text-[var(--bg)] font-medium" : "bg-white text-neutral-900 font-medium"
-                    : scrolled ? "text-[var(--muted-fg)] hover:text-[var(--fg)]" : "text-white/70 hover:text-white"
-                }`}
-              >
-                {dict.nav[key]}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = link.key === activeKey;
+              return (
+                <button
+                  key={link.key}
+                  onClick={() => scrollTo(link.href)}
+                  className="relative px-5 py-1.5 rounded-full text-sm transition-colors duration-300"
+                  style={{
+                    color: isActive
+                      ? scrolled ? "var(--bg)" : "#0a0a0a"
+                      : scrolled ? "var(--muted-fg)" : "rgba(255,255,255,0.7)",
+                    fontWeight: isActive ? 500 : 400,
+                  }}
+                >
+                  {isActive && (
+                    <m.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-full"
+                      style={{ background: scrolled ? "var(--fg)" : "white" }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{dict.nav[link.key as keyof typeof dict.nav]}</span>
+                </button>
+              );
+            })}
           </nav>
 
           <div className="hidden lg:flex items-center gap-2">
@@ -89,8 +141,9 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
             style={{ background: "var(--bg)" }}
           >
             <div className="flex items-center justify-between px-6 pt-4">
-              <Link href={`/${locale}`} className="text-sm" style={{ color: "var(--fg)" }} onClick={() => setOpen(false)}>
-                Logo Here
+              <Link href={`/${locale}`} onClick={() => setOpen(false)} className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "var(--muted)" }}>
+                <Image src="/images/logo-black.png" alt="Kultura Properties" width={28} height={28} className="dark:hidden" />
+                <Image src="/images/logo-white.png" alt="Kultura Properties" width={28} height={28} className="hidden dark:block" />
               </Link>
               <button className="p-2" style={{ color: "var(--fg)" }} onClick={() => setOpen(false)} aria-label="Close menu">
                 <X className="w-6 h-6" />
@@ -98,24 +151,23 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
             </div>
 
             <nav className="flex-1 flex flex-col justify-center px-8 gap-1">
-              {navLinks.map((key, i) => (
+              {navLinks.map((link, i) => (
                 <m.div
-                  key={key}
+                  key={link.key}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.3 }}
                 >
-                  <Link
-                    href={`/${locale}`}
-                    className="block py-4 text-3xl font-bold transition-colors border-b"
+                  <button
+                    className="block w-full text-left py-4 text-3xl font-bold transition-colors border-b"
                     style={{
-                      color: key === "home" ? "var(--fg)" : "var(--muted-fg)",
+                      color: link.key === activeKey ? "var(--fg)" : "var(--muted-fg)",
                       borderColor: "var(--border)",
                     }}
-                    onClick={() => setOpen(false)}
+                    onClick={() => { setOpen(false); setTimeout(() => scrollTo(link.href), 300); }}
                   >
-                    {dict.nav[key]}
-                  </Link>
+                    {dict.nav[link.key as keyof typeof dict.nav]}
+                  </button>
                 </m.div>
               ))}
             </nav>
