@@ -5,6 +5,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { m, LazyMotion, AnimatePresence } from "framer-motion";
 import { Play, Pause, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { fadeUp, stagger } from "@/lib/animations";
+import { useSwipe } from "@/lib/utils";
 import type { Dictionary } from "@/app/[locale]/dictionaries";
 
 const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default);
@@ -96,6 +97,7 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
   const prev = useCallback(() => setIdx((i) => (i - 1 + items.length) % items.length), [items.length]);
   const next = useCallback(() => setIdx((i) => (i + 1) % items.length), [items.length]);
   const current = items[idx];
+  const swipe = useSwipe(next, prev);
 
   useEffect(() => {
     const timer = setInterval(next, 6000);
@@ -128,7 +130,7 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
           </m.div>
 
           {/* ── Original testimonial card (unchanged) ── */}
-          <div className="relative max-w-5xl mx-auto flex flex-col md:flex-row items-stretch rounded-3xl overflow-hidden min-h-[400px]" style={{ background: "var(--card)" }}>
+          <div className="swipe-target relative max-w-5xl mx-auto flex flex-col md:flex-row items-stretch rounded-3xl overflow-hidden min-h-[400px]" style={{ background: "var(--card)" }} {...swipe}>
             {/* Image side */}
             <div className="relative w-full md:w-1/2 min-h-[300px] md:min-h-0 overflow-hidden">
               <AnimatePresence mode="popLayout">

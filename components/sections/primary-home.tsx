@@ -5,6 +5,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { m, LazyMotion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fadeUp, stagger } from "@/lib/animations";
+import { useSwipe } from "@/lib/utils";
 import type { Dictionary } from "@/app/[locale]/dictionaries";
 
 function AnimatedNumber({ target }: { target: string }) {
@@ -70,6 +71,7 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
   const left = projects[0];
   const center = projects[1];
   const right = carouselImages[rightIdx];
+  const swipe = useSwipe(next, prev);
 
   return (
     <LazyMotion features={loadFeatures} strict>
@@ -113,7 +115,7 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
 
                 {/* Right — image with arrows + animation */}
                 <div className="relative sm:w-2/5">
-                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                  <div className="swipe-target relative aspect-[3/4] rounded-2xl overflow-hidden" {...swipe}>
                     <AnimatePresence mode="popLayout">
                       <m.div
                         key={right.src}
