@@ -156,6 +156,29 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
             </button>
           </div>
 
+          {/* Stats */}
+          <m.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center mb-16 pb-16"
+            style={{ borderBottom: "1px solid var(--border)" }}
+          >
+            {[
+              { label: dict.stats.rent, value: dict.stats.rent_count },
+              { label: dict.stats.buy, value: dict.stats.buy_count },
+              { label: dict.stats.cities, value: dict.stats.cities_count },
+            ].filter((i) => i.value).map((item) => (
+              <m.div key={item.label} variants={fadeUp}>
+                <p className="text-xs mb-2 tracking-wide" style={{ color: "var(--muted-fg)" }}>{item.label}</p>
+                <p className="text-4xl md:text-5xl font-bold" style={{ color: "var(--fg)" }}>
+                  <AnimatedNumber target={item.value} />
+                </p>
+              </m.div>
+            ))}
+          </m.div>
+
           {/* Nearby landmarks */}
           <m.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}>
             <m.h3 variants={fadeUp} className="text-xl md:text-2xl font-bold mb-6" style={{ color: "var(--fg)" }}>
@@ -170,29 +193,6 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
                 </m.div>
               ))}
             </div>
-          </m.div>
-
-          {/* Stats */}
-          <m.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center mt-16 pt-16"
-            style={{ borderTop: "1px solid var(--border)" }}
-          >
-            {[
-              { label: dict.stats.rent, value: dict.stats.rent_count },
-              { label: dict.stats.buy, value: dict.stats.buy_count },
-              { label: dict.stats.cities, value: dict.stats.cities_count },
-            ].filter((i) => i.value).map((item) => (
-              <m.div key={item.label} variants={fadeUp}>
-                <p className="text-xs mb-2 tracking-wide" style={{ color: "var(--muted-fg)" }}>{item.label}</p>
-                <p className="text-4xl md:text-5xl font-bold" style={{ color: "var(--fg)" }}>
-                  <AnimatedNumber target={item.value} />
-                </p>
-              </m.div>
-            ))}
           </m.div>
         </div>
       </section>
