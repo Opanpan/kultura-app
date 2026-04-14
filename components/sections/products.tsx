@@ -5,6 +5,7 @@ import { useState } from "react";
 import { m, LazyMotion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { fadeUp, stagger } from "@/lib/animations";
+import { useSwipe } from "@/lib/utils";
 import type { Dictionary } from "@/app/[locale]/dictionaries";
 
 const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default);
@@ -29,7 +30,7 @@ const products = [
     name: "Innari 2 Lantai",
     price: "Rp 650Jt-an",
     tag: "Cluster",
-    images: Array.from({ length: 14 }, (_, i) => `/images/products/innari-2lt/${i + 1}.webp`),
+    images: ["/images/products/innari-2lt/14.webp", ...Array.from({ length: 13 }, (_, i) => `/images/products/innari-2lt/${i + 1}.webp`)],
   },
   {
     id: "innari-1lt",
@@ -50,14 +51,14 @@ const products = [
     name: "Matano Boulevard",
     price: "Rp 800Jt-an",
     tag: "Boulevard",
-    images: Array.from({ length: 11 }, (_, i) => `/images/products/matano/${i + 1}.webp`),
+    images: ["/images/products/matano/11.webp", ...Array.from({ length: 10 }, (_, i) => `/images/products/matano/${i + 1}.webp`)],
   },
   {
     id: "abaya",
     name: "New Abaya Village",
     price: "Rp 900Jt-an",
     tag: "Village",
-    images: Array.from({ length: 12 }, (_, i) => `/images/products/abaya/${i + 1}.webp`),
+    images: ["/images/products/abaya/12.webp", ...Array.from({ length: 11 }, (_, i) => `/images/products/abaya/${i + 1}.webp`)],
   },
 ];
 
@@ -127,6 +128,10 @@ export default function Products({ dict }: { dict: Dictionary }) {
     setImgIdx(0);
   };
 
+  const prevImg = () => setImgIdx((i) => (i - 1 + active.images.length) % active.images.length);
+  const nextImg = () => setImgIdx((i) => (i + 1) % active.images.length);
+  const swipe = useSwipe(nextImg, prevImg);
+
   return (
     <LazyMotion features={loadFeatures} strict>
       <section id="products" className="py-24" style={{ background: "var(--muted)" }}>
@@ -154,8 +159,8 @@ export default function Products({ dict }: { dict: Dictionary }) {
             {/* ── Featured (left) ── */}
             <div className="w-full lg:w-[62%] shrink-0">
               {/* Big image */}
-              <div className="relative rounded-3xl overflow-hidden cursor-zoom-in" style={{ aspectRatio: "4/3" }}
-                onClick={() => setLightbox({ product: active, idx: imgIdx })}>
+              <div className="swipe-target relative rounded-3xl overflow-hidden cursor-zoom-in" style={{ aspectRatio: "4/3" }}
+                onClick={() => setLightbox({ product: active, idx: imgIdx })} {...swipe}>
                 <AnimatePresence mode="popLayout">
                   <m.div key={`${active.id}-${imgIdx}`}
                     initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
@@ -225,8 +230,8 @@ export default function Products({ dict }: { dict: Dictionary }) {
                   <m.button
                     key={p.id}
                     onClick={() => selectProduct(p)}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.06, duration: 0.4 }}
                     className="flex items-center gap-4 p-3 rounded-2xl text-left transition-all duration-200 w-full group"
