@@ -100,16 +100,9 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
               {/* Row: center image+card & right image */}
               <div className="flex flex-col sm:flex-row gap-5">
                 {/* Center — image + price card */}
-                <div className="flex flex-col gap-4 sm:w-3/5">
+                <div className="flex flex-col sm:w-3/5">
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                     <Image src={center.src} alt={center.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 30vw" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold mb-1" style={{ color: "var(--fg)" }}>{t.price_label}</p>
-                    <p className="text-sm mb-4 line-clamp-1" style={{ color: "var(--muted-fg)" }}>{t.description}</p>
-                    <button className="w-full py-2.5 rounded-full text-sm font-medium border transition-colors min-h-[44px]" style={{ borderColor: "var(--border)", color: "var(--fg)" }} aria-label={t.details_cta}>
-                      {t.details_cta}
-                    </button>
                   </div>
                 </div>
 
