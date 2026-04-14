@@ -24,6 +24,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  overflow-x: hidden;
 }
 
 body {
@@ -31,6 +32,7 @@ body {
   color: var(--fg);
   font-family: var(--font-sans), system-ui, sans-serif;
   transition: background-color 0.2s, color 0.2s;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -58,4 +60,8 @@ body {
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+.swipe-target {
+  touch-action: pan-y;
 }
