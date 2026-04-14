@@ -80,7 +80,6 @@ export default function Reviews({ dict }: { dict: Dictionary }) {
                   </div>
                   <div>
                     <p className="text-sm font-semibold leading-tight" style={{ color: "var(--fg)" }}>{item.name}</p>
-                    <p className="text-xs" style={{ color: "var(--muted-fg)" }}>{item.project}</p>
                   </div>
                 </div>
               </m.div>
