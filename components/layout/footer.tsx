@@ -24,8 +24,76 @@ export default function Footer({ dict, locale }: { dict: Dictionary; locale: Loc
   const year = new Date().getFullYear();
 
   return (
-    <footer style={{ background: "var(--fg)", color: "var(--bg)" }}>
-      <div className="max-w-7xl mx-auto px-4 pt-20 pb-8">
+    <footer className="relative overflow-hidden" style={{ background: "var(--fg)", color: "var(--bg)" }}>
+
+      {/* ── Decorative pattern ── */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
+
+        {/* Topographic contour lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.035]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <mask id="footer-fade">
+              <rect width="100%" height="100%" fill="url(#footer-grad-mask)" />
+            </mask>
+            <radialGradient id="footer-grad-mask" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stopColor="white" stopOpacity="1" />
+              <stop offset="100%" stopColor="white" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <g mask="url(#footer-fade)" fill="none" stroke="white" strokeWidth="0.8">
+            <ellipse cx="75%" cy="110%" rx="55%" ry="50%" />
+            <ellipse cx="75%" cy="110%" rx="44%" ry="40%" />
+            <ellipse cx="75%" cy="110%" rx="33%" ry="30%" />
+            <ellipse cx="75%" cy="110%" rx="22%" ry="20%" />
+            <ellipse cx="75%" cy="110%" rx="11%" ry="10%" />
+            <ellipse cx="15%" cy="-10%" rx="40%" ry="35%" />
+            <ellipse cx="15%" cy="-10%" rx="30%" ry="26%" />
+            <ellipse cx="15%" cy="-10%" rx="20%" ry="17%" />
+            <ellipse cx="15%" cy="-10%" rx="10%" ry="9%" />
+          </g>
+        </svg>
+
+        {/* Fine architectural grid */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.025]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="arch-grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#arch-grid)" />
+        </svg>
+
+        {/* Crossing diagonal accent lines — top left */}
+        <svg className="absolute top-0 left-0 w-[480px] h-[480px] opacity-[0.03]" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="white" strokeWidth="0.6" fill="none">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <line key={i} x1="0" y1={i * 26} x2={i * 26} y2="0" />
+            ))}
+          </g>
+        </svg>
+
+        {/* Crossing diagonal accent lines — bottom right */}
+        <svg className="absolute bottom-0 right-0 w-[400px] h-[300px] opacity-[0.03]" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="white" strokeWidth="0.6" fill="none">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <line key={i} x1="400" y1={i * 32} x2={400 - i * 32} y2="300" />
+            ))}
+          </g>
+        </svg>
+
+        {/* Glowing orb bottom center */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[700px] h-[200px] opacity-[0.07] blur-3xl rounded-full"
+          style={{ background: "radial-gradient(ellipse, rgba(255,255,255,0.8) 0%, transparent 70%)" }} />
+      </div>
+
+      {/* ── Big background wordmark ── */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[clamp(60px,15vw,180px)] font-black leading-none opacity-[0.025] whitespace-nowrap select-none pointer-events-none tracking-[0.15em]" aria-hidden="true">
+        KULTURA
+      </div>
+
+      {/* ── Content ── */}
+      <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-8">
+
         {/* Top: tagline + description */}
         <div className="flex flex-col lg:flex-row justify-between gap-10 mb-16">
           <div className="max-w-md">
@@ -34,17 +102,34 @@ export default function Footer({ dict, locale }: { dict: Dictionary; locale: Loc
             </div>
             <h2 className="text-2xl md:text-3xl font-bold leading-tight mb-4">{t.tagline}</h2>
             <p className="text-sm leading-relaxed opacity-60">{t.description}</p>
+
+            {/* Social icons below tagline */}
+            <div className="flex gap-2 mt-6">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all opacity-50 hover:opacity-100 hover:scale-110"
+                  style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
+                  aria-label={s.label}
+                >
+                  <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current"><path d={s.icon} /></svg>
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Grid: nav + contact + social */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-10 lg:gap-16">
+          {/* Grid: nav + contact */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-10 lg:gap-20">
             {/* Nav */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest opacity-40 mb-5">{t.nav_label}</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.nav_label}</p>
               <ul className="space-y-3">
                 {footerNav.map((link) => (
                   <li key={link.key}>
-                    <a href={link.href} className="text-sm opacity-70 hover:opacity-100 transition-opacity">
+                    <a href={link.href} className="text-sm opacity-60 hover:opacity-100 transition-opacity">
                       {dict.nav[link.key as keyof typeof dict.nav]}
                     </a>
                   </li>
@@ -54,50 +139,33 @@ export default function Footer({ dict, locale }: { dict: Dictionary; locale: Loc
 
             {/* Contact */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest opacity-40 mb-5">{t.contact_label}</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.contact_label}</p>
               <ul className="space-y-3">
                 <li>
-                  <a href={`tel:${t.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  <a href={`tel:${t.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity">
                     <Phone className="w-3.5 h-3.5 shrink-0" /> {t.phone}
                   </a>
                 </li>
                 <li>
-                  <a href={`mailto:${t.email}`} className="inline-flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  <a href={`mailto:${t.email}`} className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity">
                     <Mail className="w-3.5 h-3.5 shrink-0" /> {t.email}
                   </a>
                 </li>
-                <li className="inline-flex items-center gap-2 text-sm opacity-70">
-                  <MapPin className="w-3.5 h-3.5 shrink-0" /> {t.address}
+                <li className="inline-flex items-start gap-2 text-sm opacity-60">
+                  <MapPin className="w-3.5 h-3.5 shrink-0 mt-0.5" /> {t.address}
                 </li>
               </ul>
-            </div>
-
-            {/* Social */}
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest opacity-40 mb-5">{t.social_label}</p>
-              <div className="flex gap-3">
-                {socials.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full flex items-center justify-center transition-opacity opacity-60 hover:opacity-100"
-                    style={{ background: "rgba(255,255,255,0.1)" }}
-                    aria-label={s.label}
-                  >
-                    <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current"><path d={s.icon} /></svg>
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
         </div>
 
+        {/* Divider with gradient */}
+        <div className="h-px mb-8" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent)" }} />
+
         {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-          <p className="text-xs opacity-40">{t.rights.replace("{year}", String(year))}</p>
-          <div className="flex items-center gap-6 text-xs opacity-40">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs opacity-30">{t.rights.replace("{year}", String(year))}</p>
+          <div className="flex items-center gap-6 text-xs opacity-30">
             <span>{t.terms}</span>
             <span>{t.privacy}</span>
             <Link
