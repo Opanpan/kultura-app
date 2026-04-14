@@ -265,7 +265,7 @@ export default function Products({ dict }: { dict: Dictionary }) {
           {/* WhatsApp CTA */}
           <div className="pt-14 text-center">
             <a
-              href="https://wa.me/6281234567890"
+              href="https://wa.me/6281112004007?text=%5BKPWA%20WEB%5D%20Hi%20Kultura%E2%9C%A8%2C%20Saya%20mau%20informasi%20tentang%20rumah%20%E2%80%A6%20%2C%20Nama%20saya%20%E2%80%A6"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full transition-colors"
