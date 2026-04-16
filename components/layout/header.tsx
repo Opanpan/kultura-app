@@ -121,7 +121,7 @@ export default function Header({ dict, locale }: { dict: Dictionary; locale: Loc
           </div>
 
           <button
-            className={`lg:hidden relative z-[60] p-2 transition-colors duration-300 ${open ? "text-[var(--fg)]" : scrolled ? "text-[var(--fg)]" : "text-white"}`}
+            className={`lg:hidden relative z-[60] w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${open ? "bg-[var(--muted)] text-[var(--fg)]" : scrolled ? "bg-[var(--muted)] text-[var(--fg)]" : "bg-white/15 text-white"}`}
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
