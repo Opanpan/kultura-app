@@ -38,8 +38,9 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
+# Create .next directory and cache with correct ownership
+RUN mkdir -p .next/cache/images
+RUN chown -R nextjs:nodejs .next
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static

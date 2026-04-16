@@ -10,6 +10,7 @@ services:
     volumes:
       - /home/ubuntu/home/kultura-app/public/images:/app/public/images:ro
       - /home/ubuntu/home/kultura-app/public/videos:/app/public/videos:ro
+      - nextjs-cache:/app/.next/cache
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
@@ -25,6 +26,9 @@ services:
       start_period: 60s
     networks:
       - proxy-network
+
+volumes:
+  nextjs-cache:
 
 networks:
   proxy-network:
