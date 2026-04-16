@@ -69,6 +69,7 @@ body {
 
 .animate-marquee-vertical {
   animation: marquee-vertical 25s linear infinite;
+  will-change: transform;
 }
 
 .swipe-target {
