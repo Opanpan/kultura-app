@@ -75,6 +75,16 @@ export default function Hero({ dict }: { dict: Dictionary }) {
             </m.a>
           </m.div>
         </div>
+
+        {/* Big logo */}
+        <Image
+          src="/images/logo-white.png"
+          alt=""
+          width={320}
+          height={320}
+          className="absolute bottom-6 right-6 lg:bottom-12 lg:right-12 w-36 h-36 sm:w-48 sm:h-48 lg:w-80 lg:h-80 select-none pointer-events-none"
+          aria-hidden="true"
+        />
       </section>
     </LazyMotion>
   );
