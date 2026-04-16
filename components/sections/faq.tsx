@@ -22,7 +22,7 @@ export default function FAQ({ dict }: { dict: Dictionary }) {
   return (
     <LazyMotion features={loadFeatures} strict>
       <section className="py-20" style={{ background: "var(--bg)" }}>
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-[1400px] mx-auto px-6">
           <m.div
             variants={stagger}
             initial="hidden"

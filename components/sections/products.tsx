@@ -135,7 +135,7 @@ export default function Products({ dict }: { dict: Dictionary }) {
   return (
     <LazyMotion features={loadFeatures} strict>
       <section id="products" className="py-24" style={{ background: "var(--muted)" }}>
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-[1400px] mx-auto px-6">
 
           {/* Header */}
           <m.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}
