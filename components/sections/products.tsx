@@ -101,7 +101,7 @@ function Lightbox({ product, startIdx, onClose }: {
             <button key={i} onClick={() => setIdx(i)}
               className="relative shrink-0 w-16 h-11 rounded-lg overflow-hidden transition-all"
               style={{ opacity: i === idx ? 1 : 0.35, outline: i === idx ? "2px solid white" : "none", outlineOffset: 2 }}>
-              <Image src={src} alt="" fill className="object-cover" sizes="64px" />
+              <Image src={src} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="64px" />
             </button>
           ))}
         </div>
@@ -215,7 +215,7 @@ export default function Products({ dict }: { dict: Dictionary }) {
                         opacity: i === imgIdx ? 1 : 0.45,
                         boxShadow: i === imgIdx ? "0 0 0 2px var(--fg)" : "none",
                       }}>
-                      <Image src={src} alt="" fill className="object-cover" sizes="72px" />
+                      <Image src={src} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="72px" />
                     </button>
                   ))}
                 </div>

@@ -62,9 +62,6 @@ export default async function LocaleLayout({
       <WebsiteSchema locale={locale as Locale} />
       <OrganizationSchema />
       <LocalBusinessSchema />
-      <script
-        dangerouslySetInnerHTML={{ __html: `document.documentElement.lang="${locale === "id" ? "id" : "en"}"` }}
-      />
       <Header dict={dict} locale={locale as Locale} />
       <main id="main-content" className="flex-1 overflow-x-hidden">
         {children}
