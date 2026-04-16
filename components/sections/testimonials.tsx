@@ -64,9 +64,9 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
     { image: photos[2], quote: t.quote_3, name: t.name_3 },
   ];
   const videoItems = [
-    { src: videos[0], name: t.name_1, project: t.project_1 },
-    { src: videos[1], name: t.name_2, project: t.project_2 },
-    { src: videos[2], name: t.name_3, project: t.project_3 },
+    { src: videos[0], name: t.video_name_1, project: t.project_1 },
+    { src: videos[1], name: t.video_name_2, project: t.project_2 },
+    { src: videos[2], name: t.video_name_3, project: t.project_3 },
   ];
 
   const [idx, setIdx] = useState(0);
@@ -216,7 +216,7 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                                 <Play className="w-2.5 h-2.5 text-neutral-800 fill-neutral-800 ml-px" />
                               </div>
                             </div>
-                            <span className="text-[11px] font-medium text-neutral-700">{v.name.split(" ")[0]}</span>
+                            <span className="text-[11px] font-medium text-neutral-700">{v.name}</span>
                           </button>
                         ))}
                       </div>
@@ -243,7 +243,7 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                         <Play className="w-2.5 h-2.5 text-neutral-800 fill-neutral-800 ml-px" />
                       </div>
                     </div>
-                    <span className="text-[11px] font-medium" style={{ color: "var(--muted-fg)" }}>{v.name.split(" ")[0]}</span>
+                    <span className="text-[11px] font-medium" style={{ color: "var(--muted-fg)" }}>{v.name}</span>
                   </button>
                 ))}
               </div>
