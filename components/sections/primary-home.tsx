@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useState, useCallback, useRef, useEffect } from "react";
 import { m, LazyMotion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { fadeUp, stagger } from "@/lib/animations";
 import { useSwipe } from "@/lib/utils";
 import type { Dictionary } from "@/app/[locale]/dictionaries";
 
@@ -46,149 +45,152 @@ const projects = [
 ];
 
 const nearby = [
-  { src: "/images/nearby/aeon-mall-bsd.webp", label: "Aeon Mall BSD" },
-  { src: "/images/nearby/ice-bsd.webp", label: "ICE BSD" },
-  { src: "/images/nearby/gerbang-toll-serbaraja.webp", label: "Gerbang Toll Serbaraja" },
-  { src: "/images/nearby/stasiun-cisauk.webp", label: "Stasiun Cisauk" },
-  { src: "/images/nearby/universitas-multimedia-nusantara.webp", label: "Universitas Multimedia Nusantara" },
+  { key: "1", src: "/images/nearby/stasiun-cisauk.webp" },
+  { key: "2", src: "/images/nearby/gerbang-toll-serbaraja.webp" },
+  { key: "3", src: "/images/nearby/aeon-mall-bsd.webp" },
+  { key: "4", src: "/images/nearby/universitas-multimedia-nusantara.webp" },
+  { key: "5", src: "/images/nearby/ice-bsd.webp" },
 ];
-
-function getSlides(idx: number) {
-  const len = projects.length;
-  return {
-    left: projects[idx % len],
-    center: projects[(idx + 1) % len],
-    right: projects[(idx + 2) % len],
-  };
-}
 
 export default function PrimaryHome({ dict }: { dict: Dictionary }) {
   const t = dict.primary;
-  const [rightIdx, setRightIdx] = useState(0);
-  const carouselImages = projects.slice(2); // exclude col 1 & 2
-  const prev = useCallback(() => setRightIdx((i) => (i - 1 + carouselImages.length) % carouselImages.length), [carouselImages.length]);
-  const next = useCallback(() => setRightIdx((i) => (i + 1) % carouselImages.length), [carouselImages.length]);
-  const left = projects[0];
-  const center = projects[1];
-  const right = carouselImages[rightIdx];
-  const swipe = useSwipe(next, prev);
+  const te = dict.explore;
+
+  // Carousel for col 1 (house facades)
+  const [facadeIdx, setFacadeIdx] = useState(0);
+  const prevFacade = useCallback(() => setFacadeIdx((i) => (i - 1 + projects.length) % projects.length), []);
+  const nextFacade = useCallback(() => setFacadeIdx((i) => (i + 1) % projects.length), []);
+  const facadeSwipe = useSwipe(nextFacade, prevFacade);
+
+  // Carousel for col 2 (nearby locations)
+  const [nearbyIdx, setNearbyIdx] = useState(0);
+  const prevNearby = useCallback(() => setNearbyIdx((i) => (i - 1 + nearby.length) % nearby.length), []);
+  const nextNearby = useCallback(() => setNearbyIdx((i) => (i + 1) % nearby.length), []);
+  const nearbySwipe = useSwipe(nextNearby, prevNearby);
+
+  const nearbyItems = nearby.map((n) => ({
+    ...n,
+    name: te[`landmark_${n.key}` as keyof typeof te],
+    distance: te[`landmark_${n.key}_distance` as keyof typeof te],
+    time: te[`landmark_${n.key}_time` as keyof typeof te],
+  }));
+
+  const currentNearby = nearbyItems[nearbyIdx];
+  const currentFacade = projects[facadeIdx];
+
+  // Static mezzanine — use a fixed project image
+  const mezzanineImg = projects[1];
 
   return (
     <LazyMotion features={loadFeatures} strict>
       <section className="py-20" style={{ background: "var(--bg)" }}>
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Header: title left, subtitle right-aligned top */}
+        <div className="max-w-[1400px] mx-auto px-6">
+          {/* Header */}
           <div className="flex flex-col lg:flex-row justify-between gap-6 mb-10">
-            <h2 className="text-3xl md:text-4xl lg:text-[42px] max-w-md leading-[1.15]" style={{ color: "var(--fg)" }}>
-              <span className="font-normal">{t.title}</span>{" "}
-              <span className="font-bold">{t.title_bold}</span>
+            <h2 className="text-3xl md:text-4xl lg:text-[42px] leading-[1.15]" style={{ color: "var(--fg)" }}>
+              <span className="md:block md:whitespace-nowrap font-normal">{t.title}</span>{" "}
+              <span className="md:block md:whitespace-nowrap font-bold">{t.title_bold}</span>
             </h2>
             <p className="text-sm max-w-sm lg:self-start leading-relaxed" style={{ color: "var(--muted-fg)" }}>
               {t.subtitle}
             </p>
           </div>
 
-          {/* Carousel */}
+          {/* 3-Column Section */}
           <div className="flex flex-col lg:flex-row gap-5 mb-16">
-            {/* Col 1 — tall image */}
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden lg:w-[42%] shrink-0">
-              <Image src={left.src} alt={left.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 42vw" />
+            {/* Col 1 — Facade carousel (tall) */}
+            <div className="relative lg:w-[35%] shrink-0">
+              <div className="swipe-target relative aspect-[3/4] rounded-2xl overflow-hidden" {...facadeSwipe}>
+                <AnimatePresence mode="popLayout">
+                  <m.div
+                    key={currentFacade.src}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                    className="absolute inset-0"
+                  >
+                    <Image src={currentFacade.src} alt={currentFacade.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 35vw" />
+                  </m.div>
+                </AnimatePresence>
+                {/* Label overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <span className="absolute bottom-4 left-4 text-white text-sm font-medium">{currentFacade.label}</span>
+              </div>
+              {/* Arrows */}
+              <div className="absolute top-4 right-4 flex gap-2">
+                <button onClick={prevFacade} className="w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm bg-white/80 dark:bg-black/50 transition-colors" style={{ color: "var(--fg)" }} aria-label="Previous facade">
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button onClick={nextFacade} className="w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm bg-white/80 dark:bg-black/50 transition-colors" style={{ color: "var(--fg)" }} aria-label="Next facade">
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
-            {/* Right side — col 2 + col 3 + description stacked */}
+            {/* Col 2 — Nearby carousel (top 50%) + Stats (bottom 50%) */}
             <div className="flex-1 flex flex-col gap-5">
-              {/* Row: center image+card & right image */}
-              <div className="flex flex-col sm:flex-row gap-5">
-                {/* Center — image + price card */}
-                <div className="flex flex-col sm:w-3/5">
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-                    <Image src={center.src} alt={center.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 30vw" />
-                  </div>
-                </div>
-
-                {/* Right — image with arrows + animation */}
-                <div className="relative sm:w-2/5">
-                  <div className="swipe-target relative aspect-[3/4] rounded-2xl overflow-hidden" {...swipe}>
-                    <AnimatePresence mode="popLayout">
-                      <m.div
-                        key={right.src}
-                        initial={{ opacity: 0, scale: 1.05 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                        className="absolute inset-0"
-                      >
-                        <Image src={right.src} alt={right.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 20vw" />
-                      </m.div>
-                    </AnimatePresence>
-                  </div>
-                  <div className="absolute top-4 right-4 flex gap-2">
-                    <button onClick={prev} className="w-9 h-9 rounded-full border flex items-center justify-center transition-colors" style={{ borderColor: "var(--border)", color: "var(--fg)", background: "var(--bg)" }} aria-label="Previous">
-                      <ChevronLeft className="w-4 h-4" />
-                    </button>
-                    <button onClick={next} className="w-9 h-9 rounded-full border flex items-center justify-center transition-colors" style={{ borderColor: "var(--border)", color: "var(--fg)", background: "var(--bg)" }} aria-label="Next">
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
+              {/* Nearby locations carousel */}
+              <div className="swipe-target relative flex-1 min-h-0 rounded-2xl overflow-hidden" {...nearbySwipe}>
+                <AnimatePresence mode="popLayout">
+                  <m.div
+                    key={currentNearby.src}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                    className="absolute inset-0"
+                  >
+                    <Image src={currentNearby.src} alt={currentNearby.name} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 30vw" />
+                  </m.div>
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <span className="absolute bottom-4 left-4 text-white text-sm font-medium">{currentNearby.name}</span>
+                {/* Arrows */}
+                <div className="absolute top-4 right-4 flex gap-2">
+                  <button onClick={prevNearby} className="w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm bg-white/80 dark:bg-black/50 transition-colors" style={{ color: "var(--fg)" }} aria-label="Previous nearby">
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button onClick={nextNearby} className="w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm bg-white/80 dark:bg-black/50 transition-colors" style={{ color: "var(--fg)" }} aria-label="Next nearby">
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
 
-              {/* Description — below col 2+3, beside col 1 */}
-              <div className="max-w-lg">
-                <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--muted-fg)" }}>{t.description}</p>
-                <p className="text-sm font-medium" style={{ color: "var(--fg)" }}>{t.sub_description}</p>
+              {/* Stats */}
+              <div className="rounded-2xl p-6 flex flex-col justify-center gap-4" style={{ background: "var(--muted)" }}>
+                {[
+                  { value: t.stat_1_value, unit: t.stat_1_unit, label: t.stat_1_label },
+                  { value: t.stat_2_value, unit: t.stat_2_unit, label: t.stat_2_label },
+                  { value: t.stat_3_value, unit: t.stat_3_unit, label: t.stat_3_label },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-baseline gap-3">
+                    <p className="text-2xl md:text-3xl font-bold" style={{ color: "var(--fg)" }}>
+                      <AnimatedNumber target={item.value} />
+                    </p>
+                    <p className="text-xs tracking-wide" style={{ color: "var(--muted-fg)" }}>
+                      {item.unit} {item.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Col 3 — Static mezzanine image */}
+            <div className="relative lg:w-[28%] shrink-0">
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden h-full">
+                <Image src={mezzanineImg.src} alt={mezzanineImg.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 28vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <span className="absolute bottom-4 left-4 text-white text-sm font-medium">{mezzanineImg.label}</span>
               </div>
             </div>
           </div>
 
-          {/* Mobile arrows */}
-          <div className="flex gap-2 mb-6 lg:hidden">
-            <button onClick={prev} className="w-9 h-9 rounded-full border flex items-center justify-center" style={{ borderColor: "var(--border)", color: "var(--fg)" }} aria-label="Previous">
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button onClick={next} className="w-9 h-9 rounded-full border flex items-center justify-center" style={{ borderColor: "var(--border)", color: "var(--fg)" }} aria-label="Next">
-              <ChevronRight className="w-4 h-4" />
-            </button>
+          {/* Description */}
+          <div className="max-w-lg mb-16">
+            <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--muted-fg)" }}>{t.description}</p>
+            <p className="text-sm font-medium" style={{ color: "var(--fg)" }}>{t.sub_description}</p>
           </div>
-
-          {/* Stats */}
-          <m.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center mb-16 pb-16"
-            style={{ borderBottom: "1px solid var(--border)" }}
-          >
-            {[
-              { label: dict.stats.rent, value: dict.stats.rent_count },
-              { label: dict.stats.buy, value: dict.stats.buy_count },
-              { label: dict.stats.cities, value: dict.stats.cities_count },
-            ].filter((i) => i.value).map((item) => (
-              <m.div key={item.label} variants={fadeUp}>
-                <p className="text-xs mb-2 tracking-wide" style={{ color: "var(--muted-fg)" }}>{item.label}</p>
-                <p className="text-4xl md:text-5xl font-bold" style={{ color: "var(--fg)" }}>
-                  <AnimatedNumber target={item.value} />
-                </p>
-              </m.div>
-            ))}
-          </m.div>
-
-          {/* Nearby landmarks */}
-          <m.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}>
-            <m.h3 variants={fadeUp} className="text-xl md:text-2xl font-bold mb-6" style={{ color: "var(--fg)" }}>
-              {t.nearby ?? "Nearby Landmarks"}
-            </m.h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-              {nearby.map((n) => (
-                <m.div key={n.label} variants={fadeUp} className="relative aspect-[4/3] rounded-xl overflow-hidden group">
-                  <Image src={n.src} alt={n.label} fill loading="lazy" className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <span className="absolute bottom-2 left-2 text-white text-[11px] sm:text-xs font-medium leading-tight">{n.label}</span>
-                </m.div>
-              ))}
-            </div>
-          </m.div>
         </div>
       </section>
     </LazyMotion>
