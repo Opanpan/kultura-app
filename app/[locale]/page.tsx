@@ -8,7 +8,7 @@ import About from "@/components/sections/about";
 import Reviews from "@/components/sections/reviews";
 import Testimonials from "@/components/sections/testimonials";
 import Products from "@/components/sections/products";
-import CTA from "@/components/sections/cta";export default async function HomePage({
+export default async function HomePage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -27,7 +27,6 @@ import CTA from "@/components/sections/cta";export default async function HomePa
       <Explore dict={dict} />
       <About dict={dict} />
       <Reviews dict={dict} />
-      <CTA dict={dict} />
     </article>
   );
 }
