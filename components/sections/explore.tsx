@@ -29,7 +29,7 @@ export default function Explore({ dict }: { dict: Dictionary }) {
   return (
     <LazyMotion features={loadFeatures} strict>
       <section id="explore" className="py-24" style={{ background: "var(--bg)" }}>
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-[1400px] mx-auto px-6">
           {/* Header */}
           <m.div
             variants={stagger}

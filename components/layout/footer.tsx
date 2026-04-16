@@ -19,6 +19,15 @@ const socials = [
   { label: "YouTube", href: "https://youtube.com/@kulturaproperties?si=f5dVNSnMCCXYXNdH", icon: "M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" },
 ];
 
+const housePhotos = [
+  "/images/projects/cluster-fontana.webp",
+  "/images/projects/cluster-innari.webp",
+  "/images/projects/matano-boulevard.webp",
+  "/images/projects/new-abaya-village.webp",
+  "/images/projects/new-maninjau.webp",
+  "/images/projects/matano-boulevard-2.webp",
+];
+
 export default function Footer({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const t = dict.footer;
   const year = new Date().getFullYear();
@@ -26,152 +35,203 @@ export default function Footer({ dict, locale }: { dict: Dictionary; locale: Loc
   return (
     <footer className="relative overflow-hidden" style={{ background: "var(--fg)", color: "var(--bg)" }}>
 
-      {/* ── Decorative pattern ── */}
-      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
-
-        {/* Topographic contour lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.035]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <mask id="footer-fade">
-              <rect width="100%" height="100%" fill="url(#footer-grad-mask)" />
-            </mask>
-            <radialGradient id="footer-grad-mask" cx="50%" cy="50%" r="70%">
-              <stop offset="0%" stopColor="white" stopOpacity="1" />
-              <stop offset="100%" stopColor="white" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          <g mask="url(#footer-fade)" fill="none" stroke="white" strokeWidth="0.8">
-            <ellipse cx="75%" cy="110%" rx="55%" ry="50%" />
-            <ellipse cx="75%" cy="110%" rx="44%" ry="40%" />
-            <ellipse cx="75%" cy="110%" rx="33%" ry="30%" />
-            <ellipse cx="75%" cy="110%" rx="22%" ry="20%" />
-            <ellipse cx="75%" cy="110%" rx="11%" ry="10%" />
-            <ellipse cx="15%" cy="-10%" rx="40%" ry="35%" />
-            <ellipse cx="15%" cy="-10%" rx="30%" ry="26%" />
-            <ellipse cx="15%" cy="-10%" rx="20%" ry="17%" />
-            <ellipse cx="15%" cy="-10%" rx="10%" ry="9%" />
-          </g>
-        </svg>
-
-        {/* Fine architectural grid */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.025]" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="arch-grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.5" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#arch-grid)" />
-        </svg>
-
-        {/* Crossing diagonal accent lines — top left */}
-        <svg className="absolute top-0 left-0 w-[480px] h-[480px] opacity-[0.03]" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="white" strokeWidth="0.6" fill="none">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <line key={i} x1="0" y1={i * 26} x2={i * 26} y2="0" />
-            ))}
-          </g>
-        </svg>
-
-        {/* Crossing diagonal accent lines — bottom right */}
-        <svg className="absolute bottom-0 right-0 w-[400px] h-[300px] opacity-[0.03]" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="white" strokeWidth="0.6" fill="none">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <line key={i} x1="400" y1={i * 32} x2={400 - i * 32} y2="300" />
-            ))}
-          </g>
-        </svg>
-
-        {/* Glowing orb bottom center */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[700px] h-[200px] opacity-[0.07] blur-3xl rounded-full"
-          style={{ background: "radial-gradient(ellipse, rgba(255,255,255,0.8) 0%, transparent 70%)" }} />
-      </div>
-
-      {/* ── Big background wordmark ── */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[clamp(60px,15vw,180px)] font-black leading-none opacity-[0.025] whitespace-nowrap select-none pointer-events-none tracking-[0.15em]" aria-hidden="true">
-        KULTURA
-      </div>
-
-      {/* ── Content ── */}
-      <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-8">
-
-        {/* Top: tagline + description */}
-        <div className="flex flex-col lg:flex-row justify-between gap-10 mb-16">
-          <div className="max-w-md">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center mb-5" style={{ background: "rgba(255,255,255,0.1)" }}>
-              <Image src="/images/logo-white.png" alt="Kultura Properties" width={28} height={28} />
+      {/* ── Mobile: marquee photo strip (auto-scrolling like about) ── */}
+      <div className="lg:hidden overflow-hidden">
+        <div className="flex animate-marquee">
+          {[...housePhotos, ...housePhotos].map((src, i) => (
+            <div key={i} className="relative aspect-[3/2] shrink-0 w-[50vw]">
+              <Image src={src} alt="" fill loading="lazy" className="object-cover" sizes="50vw" />
+              <div className="absolute inset-0 bg-black/20" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold leading-tight mb-4">{t.tagline}</h2>
-            <p className="text-sm leading-relaxed opacity-60">{t.description}</p>
+          ))}
+        </div>
+      </div>
 
-            {/* Social icons below tagline */}
-            <div className="flex gap-2 mt-6">
+      {/* ── Desktop: flex row — content left, photos right ── */}
+      <div className="hidden lg:flex max-h-[700px]">
+        {/* Left content */}
+        <div className="flex-1 px-6 pt-16 pb-8 max-w-[1400px] overflow-hidden">
+          <div className="max-w-xl ml-auto mr-12 xl:ml-[calc((100vw-1400px)/2+24px)] xl:mr-16">
+            {/* Logo + tagline */}
+            <div className="mb-10">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mb-5" style={{ background: "rgba(255,255,255,0.1)" }}>
+                <Image src="/images/logo-white.png" alt="Kultura Properties" width={28} height={28} />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold leading-tight mb-4">{t.tagline}</h2>
+              <p className="text-sm leading-relaxed opacity-60 max-w-md">{t.description}</p>
+              <a
+                href="https://wa.me/6281112004007?text=%5BKPWA%20WEB%5D%20Hi%20Kultura%E2%9C%A8%2C%20Saya%20mau%20informasi%20tentang%20rumah%20%E2%80%A6%20%2C%20Nama%20saya%20%E2%80%A6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-medium px-6 py-3 rounded-full transition-colors text-sm mt-6"
+                style={{ background: "var(--bg)", color: "var(--fg)" }}
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                {dict.cta.whatsapp_cta}
+              </a>
+            </div>
+
+            {/* Nav + Contact */}
+            <div className="grid grid-cols-2 gap-10 mb-10">
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.nav_label}</p>
+                <ul className="space-y-3">
+                  {footerNav.map((link) => (
+                    <li key={link.key}>
+                      <a href={link.href} className="text-sm opacity-60 hover:opacity-100 transition-opacity">
+                        {dict.nav[link.key as keyof typeof dict.nav]}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.contact_label}</p>
+                <ul className="space-y-3">
+                  <li>
+                    <a href={`tel:${t.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity">
+                      <Phone className="w-3.5 h-3.5 shrink-0" /> {t.phone}
+                    </a>
+                  </li>
+                  <li>
+                    <a href={`mailto:${t.email}`} className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity">
+                      <Mail className="w-3.5 h-3.5 shrink-0" /> {t.email}
+                    </a>
+                  </li>
+                  <li className="inline-flex items-start gap-2 text-sm opacity-60">
+                    <MapPin className="w-3.5 h-3.5 shrink-0 mt-0.5" /> {t.address}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Socials */}
+            <div className="flex gap-2 mb-10">
               {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full flex items-center justify-center transition-all opacity-50 hover:opacity-100 hover:scale-110"
                   style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
-                  aria-label={s.label}
-                >
+                  aria-label={s.label}>
                   <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current"><path d={s.icon} /></svg>
                 </a>
               ))}
             </div>
-          </div>
 
-          {/* Grid: nav + contact */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 gap-10 lg:gap-20">
-            {/* Nav */}
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.nav_label}</p>
-              <ul className="space-y-3">
-                {footerNav.map((link) => (
-                  <li key={link.key}>
-                    <a href={link.href} className="text-sm opacity-60 hover:opacity-100 transition-opacity">
-                      {dict.nav[link.key as keyof typeof dict.nav]}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.contact_label}</p>
-              <ul className="space-y-3">
-                <li>
-                  <a href={`tel:${t.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity">
-                    <Phone className="w-3.5 h-3.5 shrink-0" /> {t.phone}
-                  </a>
-                </li>
-                <li>
-                  <a href={`mailto:${t.email}`} className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity">
-                    <Mail className="w-3.5 h-3.5 shrink-0" /> {t.email}
-                  </a>
-                </li>
-                <li className="inline-flex items-start gap-2 text-sm opacity-60">
-                  <MapPin className="w-3.5 h-3.5 shrink-0 mt-0.5" /> {t.address}
-                </li>
-              </ul>
+            {/* Bottom */}
+            <div className="h-px mb-6" style={{ background: "linear-gradient(to right, rgba(255,255,255,0.12), transparent)" }} />
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-xs opacity-30">{t.rights.replace("{year}", String(year))}</p>
+              <div className="flex items-center gap-6 text-xs opacity-30">
+                <span>{t.terms}</span>
+                <span>{t.privacy}</span>
+                <Link href={`/${locale === "en" ? "id" : "en"}`} className="uppercase font-medium hover:opacity-100 transition-opacity">
+                  {locale === "en" ? "ID" : "EN"}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Divider with gradient */}
-        <div className="h-px mb-8" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent)" }} />
+        {/* Right photos — staggered 2-col brick layout, vertical auto-scroll */}
+        <div className="w-[40%] shrink-0 overflow-hidden self-stretch flex gap-2 p-2">
+          {/* Column 1 */}
+          <div className="w-1/2 overflow-hidden">
+            <div className="flex flex-col gap-2 animate-marquee-vertical">
+              {[...housePhotos.slice(0, 3), ...housePhotos.slice(0, 3)].map((src, i) => (
+                <div key={i} className={`relative rounded-2xl overflow-hidden shrink-0 ${i % 2 === 0 ? "aspect-[3/4]" : "aspect-square"}`}>
+                  <Image src={src} alt="" fill loading="lazy" className="object-cover" sizes="20vw" />
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Column 2 — offset */}
+          <div className="w-1/2 overflow-hidden pt-16">
+            <div className="flex flex-col gap-2 animate-marquee-vertical">
+              {[...housePhotos.slice(3, 6), ...housePhotos.slice(3, 6)].map((src, i) => (
+                <div key={i} className={`relative rounded-2xl overflow-hidden shrink-0 ${i % 2 === 0 ? "aspect-square" : "aspect-[3/4]"}`}>
+                  <Image src={src} alt="" fill loading="lazy" className="object-cover" sizes="20vw" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
 
-        {/* Bottom bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* ── Mobile: content below photos ── */}
+      <div className="lg:hidden px-6 pt-12 pb-8">
+        <div className="mb-10">
+          <div className="w-10 h-10 rounded-full flex items-center justify-center mb-5" style={{ background: "rgba(255,255,255,0.1)" }}>
+            <Image src="/images/logo-white.png" alt="Kultura Properties" width={28} height={28} />
+          </div>
+          <h2 className="text-2xl font-bold leading-tight mb-4">{t.tagline}</h2>
+          <p className="text-sm leading-relaxed opacity-60">{t.description}</p>
+          <a
+            href="https://wa.me/6281112004007?text=%5BKPWA%20WEB%5D%20Hi%20Kultura%E2%9C%A8%2C%20Saya%20mau%20informasi%20tentang%20rumah%20%E2%80%A6%20%2C%20Nama%20saya%20%E2%80%A6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-medium px-6 py-3 rounded-full transition-colors text-sm mt-6"
+            style={{ background: "var(--bg)", color: "var(--fg)" }}
+          >
+            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            {dict.cta.whatsapp_cta}
+          </a>
+        </div>
+
+        <div className="grid grid-cols-2 gap-10 mb-10">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.nav_label}</p>
+            <ul className="space-y-3">
+              {footerNav.map((link) => (
+                <li key={link.key}>
+                  <a href={link.href} className="text-sm opacity-60 hover:opacity-100 transition-opacity">
+                    {dict.nav[link.key as keyof typeof dict.nav]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.contact_label}</p>
+            <ul className="space-y-3">
+              <li>
+                <a href={`tel:${t.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity">
+                  <Phone className="w-3.5 h-3.5 shrink-0" /> {t.phone}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${t.email}`} className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity">
+                  <Mail className="w-3.5 h-3.5 shrink-0" /> {t.email}
+                </a>
+              </li>
+              <li className="inline-flex items-start gap-2 text-sm opacity-60">
+                <MapPin className="w-3.5 h-3.5 shrink-0 mt-0.5" /> {t.address}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="flex gap-2 mb-10">
+          {socials.map((s) => (
+            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-all opacity-50 hover:opacity-100"
+              style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
+              aria-label={s.label}>
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current"><path d={s.icon} /></svg>
+            </a>
+          ))}
+        </div>
+
+        <div className="h-px mb-6" style={{ background: "linear-gradient(to right, rgba(255,255,255,0.12), transparent)" }} />
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="text-xs opacity-30">{t.rights.replace("{year}", String(year))}</p>
           <div className="flex items-center gap-6 text-xs opacity-30">
             <span>{t.terms}</span>
             <span>{t.privacy}</span>
-            <Link
-              href={`/${locale === "en" ? "id" : "en"}`}
-              className="uppercase font-medium hover:opacity-100 transition-opacity"
-            >
+            <Link href={`/${locale === "en" ? "id" : "en"}`} className="uppercase font-medium hover:opacity-100 transition-opacity">
               {locale === "en" ? "ID" : "EN"}
             </Link>
           </div>

@@ -68,7 +68,7 @@ export default function About({ dict }: { dict: Dictionary }) {
         </div>
 
         {/* Content */}
-        <div className="max-w-7xl mx-auto px-4 py-20 lg:py-28">
+        <div className="max-w-[1400px] mx-auto px-6 py-20 lg:py-28">
           <m.div
             variants={stagger}
             initial="hidden"

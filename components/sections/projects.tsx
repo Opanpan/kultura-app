@@ -21,7 +21,7 @@ export default function Projects({ dict }: { dict: Dictionary }) {
   return (
     <LazyMotion features={loadFeatures} strict>
       <section className="py-24" style={{ background: "var(--bg)" }}>
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-[1400px] mx-auto px-6">
 
           {/* Header */}
           <m.div
@@ -32,8 +32,8 @@ export default function Projects({ dict }: { dict: Dictionary }) {
             className="flex flex-col md:flex-row justify-between items-end gap-6 mb-12"
           >
             <m.h2 variants={fadeUp} className="text-3xl md:text-4xl font-bold leading-tight" style={{ color: "var(--fg)" }}>
-              {dict.primary.title}{" "}
-              <span style={{ color: "var(--muted-fg)", fontWeight: 400 }}>{dict.primary.title_bold}</span>
+              <span className="md:block md:whitespace-nowrap">{dict.primary.title}</span>{" "}
+              <span className="md:block md:whitespace-nowrap" style={{ color: "var(--muted-fg)", fontWeight: 400 }}>{dict.primary.title_bold}</span>
             </m.h2>
             <m.p variants={fadeUp} className="text-sm max-w-xs leading-relaxed md:text-right" style={{ color: "var(--muted-fg)" }}>
               {dict.primary.subtitle}
