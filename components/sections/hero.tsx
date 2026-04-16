@@ -15,7 +15,7 @@ export default function Hero({ dict }: { dict: Dictionary }) {
       <section className="relative min-h-screen overflow-hidden flex flex-col justify-center lg:justify-end pb-0 lg:pb-12" id="hero">
         <Image
           src="/images/hero-bg.webp"
-          alt=""
+          alt="Kultura Properties — Perumahan modern di Cisauk, Tangerang dekat Stasiun Cisauk dan BSD"
           fill
           priority
           fetchPriority="high"
