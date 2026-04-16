@@ -58,7 +58,7 @@ const products = [
     name: "New Abaya Village",
     price: "Rp 900Jt-an",
     tag: "Village",
-    images: ["/images/products/abaya/12.webp", ...Array.from({ length: 11 }, (_, i) => `/images/products/abaya/${i + 1}.webp`)],
+    images: ["/images/projects/new-abaya-village.webp", "/images/products/abaya/12.webp", ...Array.from({ length: 11 }, (_, i) => `/images/products/abaya/${i + 1}.webp`)],
   },
 ];
 
