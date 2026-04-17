@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     "business:contact_data:postal_code": "15345",
     "business:contact_data:country_name": "Indonesia",
     "business:contact_data:phone_number": "+62-811-1200-4007",
-    "business:contact_data:email": "hello@kulturaproperties.com",
+    "business:contact_data:email": "kulturaproperties.info@gmail.com",
   },
   category: "Real Estate",
 };

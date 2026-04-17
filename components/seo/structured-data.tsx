@@ -98,7 +98,7 @@ export function LocalBusinessSchema() {
     image: `${BASE_URL}/images/logo.png`,
     url: BASE_URL,
     telephone: "+62-811-1200-4007",
-    email: "hello@kulturaproperties.com",
+    email: "kulturaproperties.info@gmail.com",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Cisauk",

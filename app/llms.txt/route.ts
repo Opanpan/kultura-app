@@ -27,7 +27,7 @@ Cisauk, Tangerang, Banten, Indonesia
 ## Contact
 
 - WhatsApp: +62-811-1200-4007
-- Email: hello@kulturaproperties.com
+- Email: kulturaproperties.info@gmail.com
 - Instagram: @kulturaproperties
 - TikTok: @kulturaproperties
 - YouTube: @kulturaproperties
