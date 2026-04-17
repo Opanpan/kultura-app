@@ -202,21 +202,21 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                     <div className="hidden lg:block lg:translate-x-[60%] lg:-translate-y-[40%] relative z-20 pointer-events-auto">
 
                       {/* Thumbnails — white card like reference */}
-                      <div className="inline-flex gap-3 p-3 rounded-2xl" style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(16px)" }}>
+                      <div className="inline-flex gap-3 p-3 rounded-2xl" style={{ background: "var(--card, rgba(255,255,255,0.92))", backdropFilter: "blur(16px)" }}>
                         {videoItems.map((v, i) => (
                           <button
                             key={i}
                             onClick={() => setActiveVideo(v.src)}
                             className="group flex flex-col items-center gap-1.5 cursor-pointer"
                           >
-                            <div className="relative w-[110px] aspect-square rounded-xl overflow-hidden ring-1 ring-black/5">
+                            <div className="relative w-[110px] aspect-square rounded-xl overflow-hidden" style={{ boxShadow: "inset 0 0 0 1px var(--border, rgba(0,0,0,0.05))" }}>
                               <video src={v.src} className="w-full h-full object-cover" playsInline preload="metadata" muted />
                               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
                               <div className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-white/80 flex items-center justify-center transition-opacity">
                                 <Play className="w-2.5 h-2.5 text-neutral-800 fill-neutral-800 ml-px" />
                               </div>
                             </div>
-                            <span className="text-[11px] font-medium text-neutral-700">{v.name}</span>
+                            <span className="text-[11px] font-medium" style={{ color: "var(--muted-fg)" }}>{v.name}</span>
                           </button>
                         ))}
                       </div>
@@ -236,7 +236,7 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                     onClick={() => setActiveVideo(v.src)}
                     className="group flex flex-col items-center gap-1.5 cursor-pointer flex-1"
                   >
-                    <div className="relative w-full aspect-square rounded-xl overflow-hidden ring-1 ring-black/5">
+                    <div className="relative w-full aspect-square rounded-xl overflow-hidden" style={{ boxShadow: "inset 0 0 0 1px var(--border, rgba(0,0,0,0.05))" }}>
                       <video src={v.src} className="w-full h-full object-cover" playsInline preload="metadata" muted />
                       <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
                       <div className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-white/80 flex items-center justify-center transition-opacity">
