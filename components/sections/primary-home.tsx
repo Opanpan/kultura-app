@@ -45,11 +45,11 @@ const projects = [
 ];
 
 const nearby = [
-  { key: "1", src: "/images/nearby/stasiun-cisauk.webp" },
-  { key: "2", src: "/images/nearby/gerbang-toll-serbaraja.webp" },
-  { key: "3", src: "/images/nearby/aeon-mall-bsd.webp" },
-  { key: "4", src: "/images/nearby/universitas-multimedia-nusantara.webp" },
-  { key: "5", src: "/images/nearby/ice-bsd.webp" },
+  { key: "1", src: "/images/nearby/stasiun-cisauk.webp", categoryKey: "landmark_category_1" },
+  { key: "2", src: "/images/nearby/gerbang-toll-serbaraja.webp", categoryKey: "landmark_category_1" },
+  { key: "3", src: "/images/nearby/aeon-mall-bsd.webp", categoryKey: "landmark_category_2" },
+  { key: "4", src: "/images/nearby/universitas-multimedia-nusantara.webp", categoryKey: "landmark_category_3" },
+  { key: "5", src: "/images/nearby/ice-bsd.webp", categoryKey: "landmark_category_2" },
 ];
 
 export default function PrimaryHome({ dict }: { dict: Dictionary }) {
@@ -73,6 +73,7 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
     name: te[`landmark_${n.key}` as keyof typeof te],
     distance: te[`landmark_${n.key}_distance` as keyof typeof te],
     time: te[`landmark_${n.key}_time` as keyof typeof te],
+    category: te[n.categoryKey as keyof typeof te],
   }));
 
   const currentNearby = nearbyItems[nearbyIdx];
@@ -144,8 +145,19 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
                     <Image src={currentNearby.src} alt={currentNearby.name} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 30vw" />
                   </m.div>
                 </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <span className="absolute bottom-4 left-4 text-white text-sm font-medium">{currentNearby.name}</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                {/* Category badge — bottom right */}
+                <div className="absolute bottom-4 right-4 z-10">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-[0.15em] text-white/90 backdrop-blur-md" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)" }}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/80 inline-block" />
+                    {currentNearby.category}
+                  </span>
+                </div>
+                {/* Landmark name + distance — bottom */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <p className="text-white font-semibold text-base leading-tight">{currentNearby.name}</p>
+                  <p className="text-white/60 text-xs mt-0.5">{currentNearby.distance} · {currentNearby.time}</p>
+                </div>
                 {/* Arrows */}
                 <div className="absolute top-4 right-4 flex gap-2">
                   <button onClick={prevNearby} className="w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm bg-white/80 dark:bg-black/50 transition-colors" style={{ color: "var(--fg)" }} aria-label="Previous nearby">
