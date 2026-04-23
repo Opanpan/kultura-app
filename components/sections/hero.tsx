@@ -71,7 +71,7 @@ export default function Hero({ dict }: { dict: Dictionary }) {
 
         {/* Big logo */}
         <Image
-          src="/images/logo-white.png"
+          src="/images/kultura-hero-logo.png"
           alt=""
           width={625}
           height={245}
