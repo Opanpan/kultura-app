@@ -21,6 +21,7 @@ export default function Hero({ dict }: { dict: Dictionary }) {
           fetchPriority="high"
           quality={75}
           className="object-cover"
+          style={{ transform: "scale(1.17)" }}
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-black/45" aria-hidden="true" />
@@ -33,14 +34,6 @@ export default function Hero({ dict }: { dict: Dictionary }) {
             className="max-w-2xl mb-8 text-center lg:text-left items-center lg:items-start flex flex-col"
           >
             <m.div variants={fadeUp} className="flex flex-wrap gap-2 mb-7">
-              {[t.badge_home, t.badge_apartment, t.badge_residence].map((b) => (
-                <span
-                  key={b}
-                  className="px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/15 backdrop-blur-md text-white border border-white/20"
-                >
-                  {b}
-                </span>
-              ))}
             </m.div>
 
             <m.h1
