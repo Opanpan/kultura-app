@@ -137,10 +137,10 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                       className="absolute bottom-5 right-5 z-20 flex flex-col items-end gap-3 max-w-xs"
                     >
                       <div className="flex flex-wrap gap-2 justify-end">
-                        <div className="px-4 py-2.5 rounded-full text-white text-xs font-medium" style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.2)" }}>
+                        <div className="px-4 py-2.5 rounded-2xl text-white text-base font-semibold" style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.2)" }}>
                           {current.name}
                         </div>
-                        <div className="px-4 py-2.5 rounded-full text-white text-xs font-medium max-w-[220px] truncate" style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.2)" }}>
+                        <div className="px-4 py-3 rounded-2xl text-white text-base font-medium max-w-[300px]" style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.2)" }}>
                           &ldquo;{current.quote}&rdquo;
                         </div>
                       </div>
