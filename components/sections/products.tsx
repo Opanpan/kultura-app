@@ -43,6 +43,7 @@ const products = [
   {
     id: "abaya",
     name: "New Abaya Village",
+    subtitle: { id: "Unit Terakhir 1,7 Miliar", en: "Last Unit 1.7 Billion" },
     price: "Rp 900Jt-an",
     tag: "Village",
     images: ["/images/projects/new-abaya-village.webp", "/images/products/abaya/12.webp", ...Array.from({ length: 11 }, (_, i) => `/images/products/abaya/${i + 1}.webp`)],
@@ -50,7 +51,6 @@ const products = [
   {
     id: "fontana",
     name: "Cluster Fontana",
-    subtitle: { id: "Unit Terakhir 1,7 Miliar", en: "Last Unit 1.7 Billion" },
     price: "Rp 500Jt-an",
     tag: "Cluster",
     images: [
