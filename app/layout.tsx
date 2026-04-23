@@ -1,13 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -100,7 +93,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={`${outfit.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="id" className="h-full antialiased" suppressHydrationWarning>
       <head>
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
