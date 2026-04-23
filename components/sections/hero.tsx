@@ -73,9 +73,9 @@ export default function Hero({ dict }: { dict: Dictionary }) {
         <Image
           src="/images/logo-white.png"
           alt=""
-          width={320}
-          height={320}
-          className="absolute bottom-6 right-6 lg:bottom-12 lg:right-12 w-36 h-36 sm:w-48 sm:h-48 lg:w-80 lg:h-80 select-none pointer-events-none"
+          width={625}
+          height={245}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto lg:bottom-12 lg:right-12 w-60 sm:w-80 lg:w-[500px] select-none pointer-events-none"
           aria-hidden="true"
         />
       </section>
