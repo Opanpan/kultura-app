@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import { m, LazyMotion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { fadeUp, stagger } from "@/lib/animations";
@@ -12,23 +13,9 @@ const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default
 
 const products = [
   {
-    id: "fontana",
-    name: "Cluster Fontana",
-    price: "Rp 500Jt-an",
-    tag: "Cluster",
-    images: [
-      "/images/products/fontana/fasad.webp",
-      "/images/products/fontana/bev.webp",
-      "/images/products/fontana/fasilitas.webp",
-      "/images/products/fontana/living-room.webp",
-      "/images/products/fontana/taman.webp",
-      "/images/products/fontana/layout.webp",
-    ],
-  },
-  {
     id: "innari-2lt",
     name: "Innari 2 Lantai",
-    price: "Rp 650Jt-an",
+    price: "Rp 900Jt-an",
     tag: "Cluster",
     images: ["/images/products/innari-2lt/14.webp", ...Array.from({ length: 13 }, (_, i) => `/images/products/innari-2lt/${i + 1}.webp`)],
   },
@@ -59,6 +46,21 @@ const products = [
     price: "Rp 900Jt-an",
     tag: "Village",
     images: ["/images/projects/new-abaya-village.webp", "/images/products/abaya/12.webp", ...Array.from({ length: 11 }, (_, i) => `/images/products/abaya/${i + 1}.webp`)],
+  },
+  {
+    id: "fontana",
+    name: "Cluster Fontana",
+    subtitle: { id: "Unit Terakhir 1,7 Miliar", en: "Last Unit 1.7 Billion" },
+    price: "Rp 500Jt-an",
+    tag: "Cluster",
+    images: [
+      "/images/products/fontana/fasad.webp",
+      "/images/products/fontana/bev.webp",
+      "/images/products/fontana/fasilitas.webp",
+      "/images/products/fontana/living-room.webp",
+      "/images/products/fontana/taman.webp",
+      "/images/products/fontana/layout.webp",
+    ],
   },
 ];
 
@@ -119,6 +121,7 @@ function Lightbox({ product, startIdx, onClose }: {
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 export default function Products({ dict }: { dict: Dictionary }) {
+  const { locale } = useParams<{ locale: string }>();
   const [active, setActive] = useState(products[0]);
   const [imgIdx, setImgIdx] = useState(0);
   const [lightbox, setLightbox] = useState<{ product: typeof products[0]; idx: number } | null>(null);
@@ -249,6 +252,7 @@ export default function Products({ dict }: { dict: Dictionary }) {
                     <div className="flex-1 min-w-0">
                       <p className="text-[10px] font-semibold uppercase tracking-widest mb-0.5" style={{ color: "var(--muted-fg)" }}>{p.tag}</p>
                       <p className="font-semibold text-sm leading-tight truncate" style={{ color: "var(--fg)" }}>{p.name}</p>
+                      {p.subtitle && <p className="text-[11px] font-semibold mt-0.5" style={{ color: "var(--accent, #e65100)" }}>{locale === "id" ? p.subtitle.id : p.subtitle.en}</p>}
                       <p className="text-xs mt-0.5" style={{ color: "var(--muted-fg)" }}>{dict.products.price_prefix} {p.price}</p>
                     </div>
 
