@@ -55,14 +55,18 @@ const products = [
     tag: "Cluster",
     images: [
       "/images/products/fontana/fasad.webp",
+      "/images/products/fontana/fontana-new.webp",
       "/images/products/fontana/bev.webp",
       "/images/products/fontana/fasilitas.webp",
       "/images/products/fontana/living-room.webp",
       "/images/products/fontana/taman.webp",
-      "/images/products/fontana/layout.webp",
     ],
   },
 ];
+
+const containImages = new Set([
+  "/images/products/fontana/fontana-new.webp",
+]);
 
 // ── Lightbox ──────────────────────────────────────────────────────────────────
 function Lightbox({ product, startIdx, onClose }: {
@@ -88,7 +92,7 @@ function Lightbox({ product, startIdx, onClose }: {
 
         <m.div key={idx} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}
           className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "16/10" }}>
-          <Image src={product.images[idx]} alt={product.name} fill className="object-cover" sizes="95vw" />
+          <Image src={product.images[idx]} alt={product.name} fill className={containImages.has(product.images[idx]) ? "object-contain" : "object-cover"} sizes="95vw" />
         </m.div>
 
         <div className="flex items-center justify-between mt-4 px-1">
@@ -162,14 +166,14 @@ export default function Products({ dict }: { dict: Dictionary }) {
             {/* ── Featured (left) ── */}
             <div className="w-full lg:w-[62%] shrink-0">
               {/* Big image */}
-              <div className="swipe-target relative rounded-3xl overflow-hidden cursor-zoom-in" style={{ aspectRatio: "4/3" }}
+              <div className="swipe-target relative rounded-3xl overflow-hidden cursor-zoom-in" style={{ aspectRatio: "4/3", background: "var(--muted)" }}
                 onClick={() => setLightbox({ product: active, idx: imgIdx })} {...swipe}>
                 <AnimatePresence mode="popLayout">
                   <m.div key={`${active.id}-${imgIdx}`}
                     initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
                     transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                     className="absolute inset-0">
-                    <Image src={active.images[imgIdx]} alt={active.name} fill className="object-cover"
+                    <Image src={active.images[imgIdx]} alt={active.name} fill className={containImages.has(active.images[imgIdx]) ? "object-contain" : "object-cover"}
                       sizes="(max-width: 1024px) 100vw, 62vw" priority />
                   </m.div>
                 </AnimatePresence>
