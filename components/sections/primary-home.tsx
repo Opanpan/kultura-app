@@ -37,11 +37,7 @@ const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default
 const projects = [
   { src: "/images/projects/cluster-innari.webp", label: "Cluster Innari" },
   { src: "/images/projects/matano-boulevard.webp", label: "Matano Boulevard" },
-  { src: "/images/projects/matano-boulevard-2.webp", label: "Matano Boulevard 2" },
-  { src: "/images/projects/matano-boulevard-3.webp", label: "Matano Boulevard 3" },
   { src: "/images/projects/new-abaya-village.webp", label: "New Abaya Village" },
-  { src: "/images/projects/new-maninjau.webp", label: "New Maninjau" },
-  { src: "/images/projects/cluster-fontana.webp", label: "Cluster Fontana" },
 ];
 
 const nearby = [
@@ -79,9 +75,6 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
   const currentNearby = nearbyItems[nearbyIdx];
   const currentFacade = projects[facadeIdx];
 
-  // Static mezzanine — use a fixed project image
-  const mezzanineImg = projects[1];
-
   return (
     <LazyMotion features={loadFeatures} strict>
       <section className="py-20" style={{ background: "var(--bg)" }}>
@@ -92,16 +85,13 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
               <span className="md:block md:whitespace-nowrap font-normal">{t.title}</span>{" "}
               <span className="md:block md:whitespace-nowrap font-bold">{t.title_bold}</span>
             </h2>
-            <p className="text-sm max-w-sm lg:self-start leading-relaxed" style={{ color: "var(--muted-fg)" }}>
-              {t.subtitle}
-            </p>
           </div>
 
           {/* 3-Column Section */}
-          <div className="flex flex-col lg:flex-row gap-5 mb-16">
+          <div className="flex flex-col lg:flex-row gap-5 mb-16 lg:h-[520px]">
             {/* Col 1 — Facade carousel (tall) */}
-            <div className="relative lg:w-[35%] shrink-0">
-              <div className="swipe-target relative aspect-[3/4] rounded-2xl overflow-hidden" {...facadeSwipe}>
+            <div className="relative lg:w-[30%] shrink-0">
+              <div className="swipe-target relative aspect-[3/4] lg:aspect-auto lg:h-full rounded-2xl overflow-hidden" {...facadeSwipe}>
                 <AnimatePresence mode="popLayout">
                   <m.div
                     key={currentFacade.src}
@@ -116,7 +106,13 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
                 </AnimatePresence>
                 {/* Label overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                <span className="absolute bottom-4 left-4 text-white text-sm font-medium">{currentFacade.label}</span>
+                <div className="absolute bottom-4 left-4 z-10">
+                  <span className="text-white text-sm font-medium block">{currentFacade.label}</span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 mt-1.5 rounded-full text-[10px] font-semibold uppercase tracking-[0.15em] text-white/90 backdrop-blur-md" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)" }}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/80 inline-block" />
+                    {t.built_tag}
+                  </span>
+                </div>
               </div>
               {/* Arrows */}
               <div className="absolute top-4 right-4 flex gap-2">
@@ -188,20 +184,34 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
               </div>
             </div>
 
-            {/* Col 3 — Static mezzanine image */}
-            <div className="relative lg:w-[28%] shrink-0">
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden h-full">
-                <Image src={mezzanineImg.src} alt={mezzanineImg.label} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 28vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                <span className="absolute bottom-4 left-4 text-white text-sm font-medium">{mezzanineImg.label}</span>
+            {/* Col 3 — Promo card */}
+            <div className="relative lg:w-[25%] shrink-0">
+              <div className="rounded-2xl h-full p-6 flex flex-col justify-between" style={{ background: "var(--muted)" }}>
+                {[
+                  { badge: "0%", label: "DP" },
+                  { badge: "Free", label: t.promo_2 },
+                  { badge: "5jt", label: t.promo_3 },
+                ].map((item) => (
+                  <div key={item.badge} className="flex items-center gap-5 flex-1">
+                    <div className="shrink-0 aspect-square w-full max-w-[45%] rounded-2xl flex items-center justify-center" style={{ background: "var(--bg)" }}>
+                      <span className="text-4xl font-extrabold" style={{ color: "var(--fg)" }}>{item.badge}</span>
+                    </div>
+                    <p className="text-lg font-bold leading-tight whitespace-pre-line" style={{ color: "var(--fg)" }}>{item.label}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
           {/* Description */}
-          <div className="max-w-lg mb-16">
-            <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--muted-fg)" }}>{t.description}</p>
-            <p className="text-sm font-medium" style={{ color: "var(--fg)" }}>{t.sub_description}</p>
+          <div className="flex flex-col lg:flex-row justify-between gap-8 mb-16">
+            <p className="text-sm max-w-sm leading-relaxed" style={{ color: "var(--muted-fg)" }}>
+              {t.subtitle}
+            </p>
+            <div className="max-w-lg">
+              <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--muted-fg)" }}>{t.description}</p>
+              <p className="text-sm font-medium" style={{ color: "var(--fg)" }}>{t.sub_description}</p>
+            </div>
           </div>
         </div>
       </section>
