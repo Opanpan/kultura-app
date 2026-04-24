@@ -11,9 +11,9 @@ import type { Dictionary } from "@/app/[locale]/dictionaries";
 const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default);
 
 const photos = [
-  "/images/testimonials/willy.webp",
-  "/images/testimonials/gilang.webp",
-  "/images/testimonials/widia.webp",
+  { src: "/images/testimonials/willy.webp", pos: "center 70%" },
+  { src: "/images/testimonials/gilang.webp", pos: "center 70%" },
+  { src: "/images/testimonials/widia.webp", pos: "center 40%" },
 ];
 
 const videos = [
@@ -59,9 +59,9 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
   const t = dict.testimonials;
 
   const items = [
-    { image: photos[0], quote: t.quote_1, name: t.name_1 },
-    { image: photos[1], quote: t.quote_2, name: t.name_2 },
-    { image: photos[2], quote: t.quote_3, name: t.name_3 },
+    { image: photos[0].src, pos: photos[0].pos, quote: t.quote_1, name: t.name_1 },
+    { image: photos[1].src, pos: photos[1].pos, quote: t.quote_2, name: t.name_2 },
+    { image: photos[2].src, pos: photos[2].pos, quote: t.quote_3, name: t.name_3 },
   ];
   const videoItems = [
     { src: videos[0], name: t.video_name_1, project: t.project_1 },
@@ -113,7 +113,7 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                       transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
                       className="absolute inset-0"
                     >
-                      <Image src={current.image} alt={current.name} fill loading="lazy" className="object-cover" sizes="(max-width: 1024px) 100vw, 65vw" />
+                      <Image src={current.image} alt={current.name} fill loading="lazy" className="object-cover" style={{ objectPosition: current.pos }} sizes="(max-width: 1024px) 100vw, 65vw" />
                     </m.div>
                   </AnimatePresence>
                   <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent lg:from-black/20" />
@@ -175,9 +175,6 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                       <p className="text-sm leading-relaxed text-white/70 lg:text-[var(--muted-fg)]">
                         {t.description}
                       </p>
-                      <p className="text-[11px] uppercase tracking-wider leading-relaxed max-w-[200px] mt-3 text-white/50 lg:text-[var(--muted-fg)]">
-                        {t.sub_description}
-                      </p>
                     </div>
 
                     {/* WhatsApp CTA */}
@@ -198,8 +195,12 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                   {/* Bottom row */}
                   <div className="flex flex-col sm:flex-row items-end justify-between gap-6">
 
-                    {/* Left bottom: thumbnails + counter/arrows — overlaps image on desktop, hidden on mobile */}
-                    <div className="hidden lg:block lg:translate-x-[60%] lg:-translate-y-[40%] relative z-20 pointer-events-auto">
+                    {/* Left bottom: sub_description + thumbnails */}
+                    <div className="hidden lg:flex items-center gap-6 lg:translate-x-[0%] lg:-translate-y-[40%] relative z-20 pointer-events-auto">
+
+                      <p className="text-[11px] tracking-wider leading-relaxed max-w-[140px] text-white/50 lg:text-[var(--muted-fg)]">
+                        {t.sub_description}
+                      </p>
 
                       {/* Thumbnails — white card like reference */}
                       <div className="inline-flex gap-3 p-3 rounded-2xl" style={{ background: "var(--card, rgba(255,255,255,0.92))", backdropFilter: "blur(16px)" }}>
