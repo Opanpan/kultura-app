@@ -45,7 +45,10 @@
     "stat_2_label": "built and sold",
     "stat_3_value": "20+",
     "stat_3_unit": "Years",
-    "stat_3_label": "in the property industry"
+    "stat_3_label": "in the property industry",
+    "promo_2": "PPN\nBPHTB\nNotary Fee",
+    "promo_3": "Instant\nInstallment",
+    "built_tag": "Completed Projects"
   },
   "stats": {
     "rent": "Hectares of area developed",
