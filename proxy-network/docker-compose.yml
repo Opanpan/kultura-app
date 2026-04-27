@@ -3,8 +3,6 @@ services:
     image: nginxproxy/nginx-proxy:alpine
     container_name: nginx-proxy
     restart: unless-stopped
-    group_add:
-      - "988"
     ports:
       - "80:80"
       - "443:443"
