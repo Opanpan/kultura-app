@@ -17,36 +17,36 @@ const products = [
     name: "Innari 2 Lantai",
     price: "Rp 900Jt-an",
     tag: "Cluster",
-    images: ["/images/products/innari-2lt/14.webp", ...Array.from({ length: 13 }, (_, i) => `/images/products/innari-2lt/${i + 1}.webp`)],
+    images: ["/images/products/innari-2lt/facade-new.webp", "/images/products/innari-2lt/layout.webp"],
   },
   {
     id: "innari-1lt",
     name: "Innari 1 Lantai",
     price: "Rp 650Jt-an",
     tag: "Cluster",
-    images: Array.from({ length: 15 }, (_, i) => `/images/products/innari-1lt/${i + 1}.webp`),
+    images: ["/images/products/innari-1lt/1.webp", "/images/products/innari-1lt/layout.webp", "/images/products/innari-1lt/2.webp", "/images/products/innari-1lt/3.webp", "/images/products/innari-1lt/4.webp", "/images/products/innari-1lt/5.webp", "/images/products/innari-1lt/6.webp"],
   },
   {
     id: "maninjau",
     name: "Cluster New Maninjau",
     price: "Rp 800Jt-an",
     tag: "Cluster",
-    images: ["/images/products/maninjau/new-maninjau.jpg"],
+    images: ["/images/products/maninjau/facade.webp", "/images/products/maninjau/layout.webp"],
   },
   {
     id: "matano",
     name: "Matano Boulevard",
     price: "Rp 800Jt-an",
     tag: "Boulevard",
-    images: ["/images/products/matano/11.webp", ...Array.from({ length: 10 }, (_, i) => `/images/products/matano/${i + 1}.webp`)],
+    images: ["/images/products/matano/1.webp", "/images/products/matano/layout.webp", "/images/products/matano/2.webp", "/images/products/matano/3.webp", "/images/products/matano/4.webp", "/images/products/matano/5.webp", "/images/products/matano/6.webp"],
   },
   {
     id: "abaya",
     name: "New Abaya Village",
-    subtitle: { id: "Unit Terakhir 1,7 Miliar", en: "Last Unit 1.7 Billion" },
+    subtitle: { id: "1 Unit Terakhir 1,7 Miliar", en: "1 Last Unit 1.7 Billion" },
     price: "Rp 900Jt-an",
     tag: "Village",
-    images: ["/images/projects/new-abaya-village.webp", "/images/products/abaya/12.webp", ...Array.from({ length: 11 }, (_, i) => `/images/products/abaya/${i + 1}.webp`)],
+    images: ["/images/products/abaya/1.webp", "/images/products/abaya/layout-1.webp", "/images/products/abaya/layout-2.webp", ...Array.from({ length: 12 }, (_, i) => `/images/products/abaya/${i + 2}.webp`)],
   },
   {
     id: "fontana",
@@ -66,6 +66,12 @@ const products = [
 
 const containImages = new Set([
   "/images/products/fontana/fontana-new.webp",
+  "/images/products/innari-2lt/layout.webp",
+  "/images/products/innari-1lt/layout.webp",
+  "/images/products/maninjau/layout.webp",
+  "/images/products/matano/layout.webp",
+  "/images/products/abaya/layout-1.webp",
+  "/images/products/abaya/layout-2.webp",
 ]);
 
 // ── Lightbox ──────────────────────────────────────────────────────────────────
@@ -181,14 +187,6 @@ export default function Products({ dict }: { dict: Dictionary }) {
                 {/* Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-                {/* Tag */}
-                <div className="absolute top-5 left-5">
-                  <span className="text-[11px] font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full"
-                    style={{ background: "rgba(255,255,255,0.15)", color: "white", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.2)" }}>
-                    {active.tag}
-                  </span>
-                </div>
-
                 {/* Expand hint */}
                 <div className="absolute top-5 right-5 w-11 h-11 rounded-full flex items-center justify-center"
                   style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)" }}
@@ -256,8 +254,8 @@ export default function Products({ dict }: { dict: Dictionary }) {
                     <div className="flex-1 min-w-0">
                       <p className="text-[10px] font-semibold uppercase tracking-widest mb-0.5" style={{ color: "var(--muted-fg)" }}>{p.tag}</p>
                       <p className="font-semibold text-sm leading-tight truncate" style={{ color: "var(--fg)" }}>{p.name}</p>
-                      {p.subtitle && <p className="text-[11px] font-semibold mt-0.5" style={{ color: "var(--accent, #e65100)" }}>{locale === "id" ? p.subtitle.id : p.subtitle.en}</p>}
                       <p className="text-xs mt-0.5" style={{ color: "var(--muted-fg)" }}>{dict.products.price_prefix} {p.price}</p>
+                      {p.subtitle && <p className="text-[11px] font-semibold mt-0.5" style={{ color: "var(--accent, #e65100)" }}>{locale === "id" ? p.subtitle.id : p.subtitle.en}</p>}
                     </div>
 
                     {/* Arrow */}
