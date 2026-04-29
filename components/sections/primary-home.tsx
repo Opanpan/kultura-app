@@ -146,7 +146,7 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
               </AnimatePresence>
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
               {/* Badge */}
-              <span className="absolute top-4 left-1/2 -translate-x-1/2 z-10 px-4 py-1.5 rounded-full text-xs font-semibold text-white backdrop-blur-md whitespace-nowrap" style={{ background: "rgba(0,0,0,0.4)" }}>{t.badge_location}</span>
+              <span className="absolute top-4 left-4 z-10 px-4 py-1.5 rounded-full text-xs font-semibold text-white backdrop-blur-md whitespace-nowrap" style={{ background: "rgba(0,0,0,0.4)" }}>{t.badge_location}</span>
               {/* Arrows */}
               <div className="absolute top-4 right-4 flex gap-2 z-10">
                 <button onClick={prevNearby} className="w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-sm bg-white/80 dark:bg-black/50" style={{ color: "var(--fg)" }} aria-label="Previous nearby">
@@ -157,12 +157,12 @@ export default function PrimaryHome({ dict }: { dict: Dictionary }) {
                 </button>
               </div>
               {/* Info */}
-              <div className="absolute bottom-5 left-5 right-5 z-10 flex items-end justify-between">
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-5 sm:left-5 sm:right-5 z-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
                 <div>
-                  <p className="text-white font-semibold text-lg">{currentNearby.name}</p>
-                  <p className="text-white/70 text-sm">{currentNearby.distance} - {currentNearby.time}</p>
+                  <p className="text-white font-semibold text-base sm:text-lg">{currentNearby.name}</p>
+                  <p className="text-white/70 text-xs sm:text-sm">{currentNearby.distance} - {currentNearby.time}</p>
                 </div>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider text-white/90 backdrop-blur-md shrink-0" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)" }}>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-white/90 backdrop-blur-md self-start sm:self-auto shrink-0" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)" }}>
                   📍 {currentNearby.category}
                 </span>
               </div>
