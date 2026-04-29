@@ -13,17 +13,20 @@ export default function Hero({ dict }: { dict: Dictionary }) {
   return (
     <LazyMotion features={loadFeatures} strict>
       <section className="relative min-h-screen overflow-hidden flex flex-col justify-center lg:justify-end pb-16 lg:pb-24" id="hero">
-        <Image
-          src="/images/hero-bg.webp"
-          alt="Kultura Properties — Perumahan modern di Cisauk, Tangerang dekat Stasiun Cisauk dan BSD"
-          fill
-          priority
-          fetchPriority="high"
-          quality={75}
-          className="object-cover"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/images/hero-bg-poster.webp"
+          className="absolute inset-0 w-full h-full object-cover"
           style={{ transform: "scale(1.17)" }}
-          sizes="100vw"
-        />
+          aria-hidden="true"
+        >
+          <source src="/videos/hero-bg.webm" type="video/webm" />
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-black/45" aria-hidden="true" />
 
         <div className="relative max-w-[1400px] mx-auto px-6 w-full flex flex-col items-center lg:items-start">
