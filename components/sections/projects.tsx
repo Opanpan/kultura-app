@@ -33,10 +33,10 @@ export default function Projects({ dict }: { dict: Dictionary }) {
           >
             <m.h2 variants={fadeUp} className="text-3xl md:text-4xl font-bold leading-tight" style={{ color: "var(--fg)" }}>
               <span className="md:block md:whitespace-nowrap">{dict.primary.title}</span>{" "}
-              <span className="md:block md:whitespace-nowrap" style={{ color: "var(--muted-fg)", fontWeight: 400 }}>{dict.primary.title_bold}</span>
+              <span className="md:block md:whitespace-nowrap" style={{ color: "var(--muted-fg)", fontWeight: 400 }}>{dict.primary.title_highlight}</span>
             </m.h2>
             <m.p variants={fadeUp} className="text-sm max-w-xs leading-relaxed md:text-right" style={{ color: "var(--muted-fg)" }}>
-              {dict.primary.subtitle}
+              {dict.primary.section_label}
             </m.p>
           </m.div>
 

@@ -47,9 +47,9 @@ export default function About({ dict }: { dict: Dictionary }) {
   const s = dict.primary;
 
   const stats = [
-    { value: s.stat_1_value, unit: s.stat_1_unit, label: s.stat_1_label },
-    { value: s.stat_2_value, unit: s.stat_2_unit, label: s.stat_2_label },
-    { value: s.stat_3_value, unit: s.stat_3_unit, label: s.stat_3_label },
+    { value: s.stat_1_value, label: s.stat_1_label },
+    { value: s.stat_2_value, label: s.stat_2_label },
+    { value: s.stat_3_value, label: s.stat_3_label },
   ];
 
   return (
@@ -89,7 +89,7 @@ export default function About({ dict }: { dict: Dictionary }) {
                     <p className="text-4xl md:text-5xl font-bold leading-none mb-1">
                       <Counter target={st.value} />
                     </p>
-                    <p className="text-xs uppercase tracking-wider opacity-40">{st.unit} {st.label}</p>
+                    <p className="text-xs uppercase tracking-wider opacity-40">{st.label}</p>
                   </div>
                 ))}
               </m.div>
@@ -149,7 +149,7 @@ export default function About({ dict }: { dict: Dictionary }) {
                   <p className="text-4xl md:text-5xl font-bold leading-none mb-1">
                     <Counter target={st.value} />
                   </p>
-                  <p className="text-xs uppercase tracking-wider opacity-40">{st.unit} {st.label}</p>
+                  <p className="text-xs uppercase tracking-wider opacity-40">{st.label}</p>
                 </div>
               ))}
             </m.div>
