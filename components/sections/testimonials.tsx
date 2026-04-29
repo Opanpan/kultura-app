@@ -169,6 +169,7 @@ export default function Testimonials({ dict }: { dict: Dictionary }) {
                   <div className="flex justify-between items-start pointer-events-auto">
                     {/* Title — visible on muted bg on desktop, on image on mobile */}
                     <div className="max-w-xs lg:max-w-sm">
+                      <p className="text-sm italic mb-2 text-white/60 lg:text-[var(--muted-fg)]">{t.label}</p>
                       <h2 className="text-3xl md:text-4xl lg:text-[52px] font-bold leading-[1.08] mb-3 text-white lg:text-[var(--fg)]">
                         {t.title}
                       </h2>
