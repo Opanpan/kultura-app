@@ -16,7 +16,6 @@ const navLinks = [
   { key: "location", href: "#explore" },
   { key: "about", href: "#about" },
   { key: "reviews", href: "#reviews" },
-  { key: "contact", href: "#cta" },
 ] as const;
 
 const sectionIds = navLinks.map((l) => l.href.slice(1));
