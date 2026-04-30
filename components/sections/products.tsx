@@ -46,7 +46,7 @@ const products = [
     subtitle: { id: "1 Unit Terakhir 1,7 Miliar", en: "1 Last Unit 1.7 Billion" },
     price: "Rp 900Jt-an",
     tag: "Village",
-    images: ["/images/products/abaya/1.webp", "/images/products/abaya/layout-1.webp", "/images/products/abaya/layout-2.webp", ...Array.from({ length: 12 }, (_, i) => `/images/products/abaya/${i + 2}.webp`)],
+    images: ["/images/products/abaya/1.webp", "/images/products/abaya/layout-1.webp", "/images/products/abaya/layout-2.webp", ...Array.from({ length: 11 }, (_, i) => `/images/products/abaya/${i + 2}.webp`)],
   },
   {
     id: "fontana",
