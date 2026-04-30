@@ -29,12 +29,12 @@ export default function Hero({ dict }: { dict: Dictionary }) {
         </video>
         <div className="absolute inset-0 bg-black/45" aria-hidden="true" />
 
-        <div className="relative max-w-[1400px] mx-auto px-6 w-full flex flex-col items-center lg:items-start">
+        <div className="relative max-w-[1400px] mx-auto px-6 w-full flex flex-col items-start lg:items-start">
           <m.div
             variants={stagger}
             initial="hidden"
             animate="visible"
-            className="max-w-2xl mb-8 text-center lg:text-left items-center lg:items-start flex flex-col"
+            className="max-w-2xl mb-8 text-left lg:text-left items-start lg:items-start flex flex-col"
           >
             <m.div variants={fadeUp} className="flex flex-wrap gap-2 mb-7">
             </m.div>
@@ -61,7 +61,7 @@ export default function Hero({ dict }: { dict: Dictionary }) {
               href="https://wa.me/6281112004007?text=%5BKPWA%20WEB%5D%20Hi%20Kultura%E2%9C%A8%2C%20Saya%20mau%20informasi%20tentang%20rumah%20%E2%80%A6%20%2C%20Nama%20saya%20%E2%80%A6"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-medium px-4 py-2 rounded-full transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-medium px-4 py-2 rounded-full transition-colors self-center lg:self-start"
               style={{ background: "var(--fg)", color: "var(--bg)" }}
             >
               <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden="true">
