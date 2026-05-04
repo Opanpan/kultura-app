@@ -52,10 +52,6 @@ export default function Hero({ dict }: { dict: Dictionary }) {
               {t.description}
             </m.p>
 
-            <m.p variants={fadeUp} className="text-white/60 text-sm mb-6">
-              {t.sub_description}
-            </m.p>
-
             <m.a
               variants={fadeUp}
               href="https://wa.me/6281112004007?text=%5BKPWA%20WEB%5D%20Hi%20Kultura%E2%9C%A8%2C%20Saya%20mau%20informasi%20tentang%20rumah%20%E2%80%A6%20%2C%20Nama%20saya%20%E2%80%A6"
