@@ -31,7 +31,7 @@ const products = [
     name: "Cluster New Maninjau",
     price: "Rp 800Jt-an",
     tag: "Cluster",
-    images: ["/images/products/maninjau/facade.webp", "/images/products/maninjau/layout.webp"],
+    images: ["/images/products/maninjau/facade.webp", "/images/products/maninjau/layout.webp", "/images/products/maninjau/3.webp", "/images/products/maninjau/4.webp"],
   },
   {
     id: "matano",
@@ -46,7 +46,7 @@ const products = [
     subtitle: { id: "1 Unit Terakhir 1,7 Miliar", en: "1 Last Unit 1.7 Billion" },
     price: "Rp 900Jt-an",
     tag: "Village",
-    images: ["/images/products/abaya/1.webp", "/images/products/abaya/layout-1.webp", "/images/products/abaya/layout-2.webp", ...Array.from({ length: 11 }, (_, i) => `/images/products/abaya/${i + 2}.webp`)],
+    images: ["/images/products/abaya/1.webp", "/images/products/abaya/layout-1.webp", "/images/products/abaya/layout-2.webp", ...Array.from({ length: 9 }, (_, i) => `/images/products/abaya/${i + 2}.webp`)],
   },
   {
     id: "fontana",
