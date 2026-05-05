@@ -96,18 +96,18 @@
     "landmark_category_3": "Education",
     "radius": "Nearby Locations",
     "landmark_1": "Cisauk Station",
-    "landmark_1_distance": "3 km",
+    "landmark_1_distance": "2 km",
     "landmark_1_time": "8 min",
     "landmark_2": "Serbaraja Toll Gate",
-    "landmark_2_distance": "6 km",
+    "landmark_2_distance": "4 km",
     "landmark_2_time": "11 min",
     "landmark_3": "AEON Mall BSD",
-    "landmark_3_distance": "6 km",
+    "landmark_3_distance": "4 km",
     "landmark_3_time": "11 min",
     "landmark_4": "Prasetya Mulya",
     "landmark_4_distance": "5 km",
     "landmark_4_time": "10 min",
-    "landmark_5": "Universitas Multimedia Nusantara",
+    "landmark_5": "ICE BSD",
     "landmark_5_distance": "15 km",
     "landmark_5_time": "20 min"
   },
@@ -165,7 +165,8 @@
     "a5": "Yes, we handle various property types including residential, commercial, and land."
   },
   "cta": {
-    "title": "Happiness starts from your home",
+    "title_1": "Happiness begins,",
+    "title_2": "from the right home.",
     "whatsapp_cta": "Chat via WhatsApp"
   },
   "footer": {
@@ -176,7 +177,7 @@
     "phone": "+62 811-1200-4007",
     "email": "kulturaproperties.info@gmail.com",
     "address": "Cisauk, Tangerang, Banten",
-    "social_label": "Follow Us",
+    "social_label": "Visit Our Social Media",
     "rights": "© {year} Kultura Properties. All Rights Reserved.",
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy"
