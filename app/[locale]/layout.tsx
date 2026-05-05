@@ -3,6 +3,7 @@ import { hasLocale, getDictionary, locales, type Locale } from "./dictionaries";
 import { WebsiteSchema, OrganizationSchema, LocalBusinessSchema } from "@/components/seo/structured-data";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import SessionLocaleReset from "@/components/ui/session-locale-reset";
 import type { Metadata } from "next";
 
 export async function generateStaticParams() {
@@ -59,6 +60,7 @@ export default async function LocaleLayout({
 
   return (
     <>
+      <SessionLocaleReset locale={locale} />
       <WebsiteSchema locale={locale as Locale} />
       <OrganizationSchema />
       <LocalBusinessSchema />
