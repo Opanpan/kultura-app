@@ -20,7 +20,8 @@ export default function CTA({ dict }: { dict: Dictionary }) {
           className="max-w-2xl mx-auto px-4"
         >
           <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-8">
-            {t.title}
+            <span className="block">{t.title_1}</span>
+            <span className="block font-normal italic">{t.title_2}</span>
           </h2>
           <a
             href="https://wa.me/6281112004007?text=%5BKPWA%20WEB%5D%20Hi%20Kultura%E2%9C%A8%2C%20Saya%20mau%20informasi%20tentang%20rumah%20%E2%80%A6%20%2C%20Nama%20saya%20%E2%80%A6"
