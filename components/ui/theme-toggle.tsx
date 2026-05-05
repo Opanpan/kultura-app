@@ -7,7 +7,7 @@ export default function ThemeToggle({ scrolled = false }: { scrolled?: boolean }
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
+    const stored = sessionStorage.getItem("theme");
     const isDark = stored === "dark";
     setDark(isDark);
     document.documentElement.classList.toggle("dark", isDark);
@@ -17,7 +17,7 @@ export default function ThemeToggle({ scrolled = false }: { scrolled?: boolean }
     const next = !dark;
     setDark(next);
     document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
+    sessionStorage.setItem("theme", next ? "dark" : "light");
   };
 
   return (

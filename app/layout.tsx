@@ -102,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script
           id="theme-init"
           strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark')}else if(!t){localStorage.setItem('theme','light')}}catch(e){}})()` }}
+          dangerouslySetInnerHTML={{ __html: `(function(){try{var t=sessionStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}}catch(e){}})()` }}
         />
         {children}
       </body>
