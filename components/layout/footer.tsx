@@ -40,7 +40,7 @@ export default function Footer({ dict, locale }: { dict: Dictionary; locale: Loc
       <div className="relative max-w-[1400px] mx-auto px-6 pt-16 pb-8">
 
         {/* Main 2-col grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
+        <div className="grid grid-cols-1 gap-16 mb-16 lg:grid-cols-2">
 
           {/* LEFT — brand + nav + contact + socials */}
           <div className="flex flex-col">
@@ -66,7 +66,7 @@ export default function Footer({ dict, locale }: { dict: Dictionary; locale: Loc
             </div>
 
             {/* Nav + Contact */}
-            <div className="grid grid-cols-2 gap-10 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.nav_label}</p>
                 <ul className="space-y-3">
@@ -81,7 +81,7 @@ export default function Footer({ dict, locale }: { dict: Dictionary; locale: Loc
               </div>
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.contact_label}</p>
-                <ul className="space-y-3">
+                <ul className="space-y-3 mb-8">
                   <li>
                     <a href={`tel:${t.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 text-xs sm:text-sm opacity-60 hover:opacity-100 transition-opacity">
                       <Phone className="w-3.5 h-3.5 shrink-0" /> {t.phone}
@@ -96,24 +96,25 @@ export default function Footer({ dict, locale }: { dict: Dictionary; locale: Loc
                     <MapPin className="w-3.5 h-3.5 shrink-0 mt-0.5" /> {t.address}
                   </li>
                 </ul>
-              </div>
-            </div>
 
-            {/* Socials */}
-            <div className="flex gap-2">
-              {socials.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all opacity-50 hover:opacity-100 hover:scale-110"
-                  style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
-                  aria-label={s.label}>
-                  <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current"><path d={s.icon} /></svg>
-                </a>
-              ))}
+                {/* Socials — below Hubungi Kami */}
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5">{t.social_label}</p>
+                <div className="flex gap-3">
+                  {socials.map((s) => (
+                    <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                      className="w-12 h-12 rounded-full flex items-center justify-center transition-all opacity-50 hover:opacity-100 hover:scale-110"
+                      style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
+                      aria-label={s.label}>
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current"><path d={s.icon} /></svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
           {/* RIGHT — collab form */}
-          <div className="rounded-2xl p-8" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          <div className="rounded-2xl p-8" style={{ background: "var(--bg)", border: "1px solid var(--border)" }}>
             <CollabForm locale={locale} />
           </div>
         </div>
