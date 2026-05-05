@@ -6,10 +6,11 @@ import { Send, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 export default function CollabForm({ locale }: { locale: string }) {
   const isId = locale === "id";
 
-  const [form, setForm] = useState({ name: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", phone: "", message: "", website: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [cooldown, setCooldown] = useState(false);
 
   const label = {
     title: "Let's Collab!",
@@ -39,6 +40,7 @@ export default function CollabForm({ locale }: { locale: string }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (cooldown) return;
     setLoading(true);
     setError(false);
 
@@ -50,6 +52,8 @@ export default function CollabForm({ locale }: { locale: string }) {
       });
       if (!res.ok) throw new Error("Failed");
       setSubmitted(true);
+      setCooldown(true);
+      setTimeout(() => setCooldown(false), 60_000);
     } catch {
       setError(true);
     } finally {
@@ -58,19 +62,19 @@ export default function CollabForm({ locale }: { locale: string }) {
   };
 
   const inputBase =
-    "w-full rounded-xl px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:opacity-40 bg-white/8 border border-white/12 text-white focus:border-white/40 focus:bg-white/12";
+    "w-full rounded-xl px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:opacity-40 bg-[var(--muted)] border border-[var(--border)] text-[var(--fg)] focus:border-[var(--muted-fg)] focus:bg-[var(--card)]";
 
   if (submitted) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
-        <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.1)" }}>
-          <CheckCircle2 className="w-7 h-7 text-white" />
+        <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ background: "var(--muted)" }}>
+          <CheckCircle2 className="w-7 h-7" style={{ color: "var(--fg)" }} />
         </div>
-        <p className="text-xl font-bold text-white">{label.success_title}</p>
-        <p className="text-sm opacity-50 text-white max-w-xs">{label.success_body}</p>
+        <p className="text-xl font-bold" style={{ color: "var(--fg)" }}>{label.success_title}</p>
+        <p className="text-sm max-w-xs" style={{ color: "var(--muted-fg)" }}>{label.success_body}</p>
         <button
-          onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", message: "" }); }}
-          className="mt-2 text-xs underline opacity-40 hover:opacity-70 transition-opacity text-white"
+          onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", message: "", website: "" }); }}
+          className="mt-2 text-xs underline opacity-40 hover:opacity-70 transition-opacity" style={{ color: "var(--fg)" }}
         >
           {label.send_another}
         </button>
@@ -80,14 +84,14 @@ export default function CollabForm({ locale }: { locale: string }) {
 
   return (
     <div>
-      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5 text-white">Collaboration</p>
-      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">{label.title}</h3>
-      <p className="text-sm leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.5)" }}>{label.subtitle}</p>
+      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 mb-5" style={{ color: "var(--fg)" }}>Collaboration</p>
+      <h3 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: "var(--fg)" }}>{label.title}</h3>
+      <p className="text-sm leading-relaxed mb-8" style={{ color: "var(--muted-fg)" }}>{label.subtitle}</p>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3" autoComplete="off">
         {/* Name */}
         <div>
-          <label className="block text-[11px] font-medium uppercase tracking-wider mb-1.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <label className="block text-[11px] font-medium uppercase tracking-wider mb-1.5" style={{ color: "var(--muted-fg)" }}>
             {label.name}
           </label>
           <input
@@ -103,7 +107,7 @@ export default function CollabForm({ locale }: { locale: string }) {
 
         {/* Phone */}
         <div>
-          <label className="block text-[11px] font-medium uppercase tracking-wider mb-1.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <label className="block text-[11px] font-medium uppercase tracking-wider mb-1.5" style={{ color: "var(--muted-fg)" }}>
             {label.phone}
           </label>
           <input
@@ -119,7 +123,7 @@ export default function CollabForm({ locale }: { locale: string }) {
 
         {/* Message */}
         <div>
-          <label className="block text-[11px] font-medium uppercase tracking-wider mb-1.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <label className="block text-[11px] font-medium uppercase tracking-wider mb-1.5" style={{ color: "var(--muted-fg)" }}>
             {label.message}
           </label>
           <textarea
@@ -132,6 +136,17 @@ export default function CollabForm({ locale }: { locale: string }) {
             className={`${inputBase} resize-none`}
           />
         </div>
+
+        {/* Honeypot — hidden from real users, bots fill it */}
+        <input
+          type="text"
+          name="website"
+          value={form.website}
+          onChange={(e) => setForm({ ...form, website: e.target.value })}
+          tabIndex={-1}
+          aria-hidden="true"
+          style={{ position: "absolute", opacity: 0, pointerEvents: "none", height: 0, overflow: "hidden" }}
+        />
 
         {/* Error */}
         {error && (
@@ -146,7 +161,7 @@ export default function CollabForm({ locale }: { locale: string }) {
           type="submit"
           disabled={loading}
           className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-90 active:scale-[0.98] mt-1 disabled:opacity-60 disabled:cursor-not-allowed"
-          style={{ background: "var(--bg)", color: "var(--fg)" }}
+          style={{ background: "var(--fg)", color: "var(--bg)" }}
         >
           {loading ? (
             <>
