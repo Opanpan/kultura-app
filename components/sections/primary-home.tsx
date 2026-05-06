@@ -44,7 +44,7 @@ const nearby = [
   { key: "1", src: "/images/nearby/stasiun-cisauk.webp", categoryKey: "landmark_category_1" },
   { key: "2", src: "/images/nearby/gerbang-toll-serbaraja.webp", categoryKey: "landmark_category_1" },
   { key: "3", src: "/images/nearby/aeon-mall-bsd.webp", categoryKey: "landmark_category_2" },
-  { key: "4", src: "/images/nearby/universitas-multimedia-nusantara.webp", categoryKey: "landmark_category_3" },
+  { key: "4", src: "/images/nearby/universitas-prasetya-mulya.webp", categoryKey: "landmark_category_3" },
   { key: "5", src: "/images/nearby/ice-bsd.webp", categoryKey: "landmark_category_2" },
 ];
 

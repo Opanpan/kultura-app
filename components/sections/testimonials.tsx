@@ -11,9 +11,9 @@ import type { Dictionary } from "@/app/[locale]/dictionaries";
 const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default);
 
 const photos = [
-  { src: "/images/testimonials/willy.webp", pos: "center 70%" },
-  { src: "/images/testimonials/gilang.webp", pos: "center 70%" },
-  { src: "/images/testimonials/widia.webp", pos: "center 40%" },
+  { src: "/images/testimonials/willy-v2.webp", pos: "center 70%" },
+  { src: "/images/testimonials/gilang-v2.webp", pos: "center 70%" },
+  { src: "/images/testimonials/widia-v2.webp", pos: "center 40%" },
 ];
 
 const videos = [

@@ -12,7 +12,7 @@ const landmarks = [
   { key: "1", image: "/images/nearby/stasiun-cisauk.webp" },
   { key: "2", image: "/images/nearby/gerbang-toll-serbaraja.webp" },
   { key: "3", image: "/images/nearby/aeon-mall-bsd.webp" },
-  { key: "4", image: "/images/nearby/universitas-multimedia-nusantara.webp" },
+  { key: "4", image: "/images/nearby/universitas-prasetya-mulya.webp" },
   { key: "5", image: "/images/nearby/ice-bsd.webp" },
 ] as const;
 
