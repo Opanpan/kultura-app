@@ -38,7 +38,7 @@ const products = [
     name: "Matano Boulevard",
     price: "Rp 800Jt-an",
     tag: "Boulevard",
-    images: ["/images/products/matano/1-v2.webp", "/images/products/matano/layout-v2.webp", "/images/products/matano/2-v2.webp", "/images/products/matano/3-v2.webp", "/images/products/matano/4-v2.webp", "/images/products/matano/5-v2.webp", "/images/products/matano/6-v2.webp"],
+    images: ["/images/products/matano/facade-v3.webp", "/images/products/matano/layout-v3.webp", "/images/products/matano/1-v3.webp", "/images/products/matano/2-v3.webp", "/images/products/matano/3-v3.webp", "/images/products/matano/4-v3.webp", "/images/products/matano/5-v3.webp"],
   },
   {
     id: "abaya",
@@ -46,7 +46,7 @@ const products = [
     subtitle: { id: "1 Unit Terakhir 1,7 Miliar", en: "1 Last Unit 1.7 Billion" },
     price: "Rp 900Jt-an",
     tag: "Village",
-    images: ["/images/products/abaya/1-v2.webp", "/images/products/abaya/layout-1-v2.webp", "/images/products/abaya/layout-2-v2.webp", ...Array.from({ length: 9 }, (_, i) => `/images/products/abaya/${i + 2}-v2.webp`)],
+    images: ["/images/products/abaya/1-v2.webp", "/images/products/abaya/layout-2-v2.webp", "/images/products/abaya/layout-1-v2.webp", "/images/products/abaya/3-v2.webp", "/images/products/abaya/2-v2.webp", "/images/products/abaya/4-v2.webp", "/images/products/abaya/5-v2.webp", "/images/products/abaya/6-v2.webp", "/images/products/abaya/7-v2.webp", "/images/products/abaya/8-v2.webp", "/images/products/abaya/9-v2.webp", "/images/products/abaya/10-v2.webp"],
   },
   {
     id: "fontana",
@@ -69,7 +69,7 @@ const containImages = new Set([
   "/images/products/innari-2lt/layout-v2.webp",
   "/images/products/innari-1lt/layout-v2.webp",
   "/images/products/maninjau/layout-v2.webp",
-  "/images/products/matano/layout-v2.webp",
+  "/images/products/matano/layout-v3.webp",
   "/images/products/abaya/layout-1-v2.webp",
   "/images/products/abaya/layout-2-v2.webp",
 ]);
