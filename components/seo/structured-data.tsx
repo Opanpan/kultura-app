@@ -1,6 +1,6 @@
 import type { Locale } from "@/app/[locale]/dictionaries";
 
-const BASE_URL = "https://kultura.id";
+const BASE_URL = "https://kulturaproperties.com";
 
 export function WebsiteSchema({ locale }: { locale: Locale }) {
   const schema = {

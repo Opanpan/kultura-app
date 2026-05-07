@@ -12,7 +12,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kultura.id"),
+  metadataBase: new URL("https://kulturaproperties.com"),
   title: { default: "Kultura Properties | Perumahan Cisauk Tangerang Dekat Stasiun & BSD", template: "%s | Kultura Properties" },
   description:
     "Kultura Properties — pengembang perumahan terpercaya di Cisauk, Tangerang. 20+ tahun pengalaman, 7000+ unit terbangun. Rumah mulai Rp 600jt-an dekat Stasiun Cisauk & BSD. Cluster Fontana, Innari, Matano Boulevard, New Abaya Village.",

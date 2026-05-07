@@ -31,7 +31,7 @@ Cisauk, Tangerang, Banten, Indonesia
 - Instagram: @kulturaproperties
 - TikTok: @kulturaproperties
 - YouTube: @kulturaproperties
-- Website: https://kultura.id
+- Website: https://kulturaproperties.com
 
 ## Key Facts
 

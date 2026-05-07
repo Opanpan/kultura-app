@@ -27,15 +27,15 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `https://kultura.id/${locale}`,
-      languages: { "en": "https://kultura.id/en", "id": "https://kultura.id/id" },
+      canonical: `https://kulturaproperties.com/${locale}`,
+      languages: { "en": "https://kulturaproperties.com/en", "id": "https://kulturaproperties.com/id" },
     },
     openGraph: {
       title,
       description,
       locale: isId ? "id_ID" : "en_US",
       alternateLocale: isId ? "en_US" : "id_ID",
-      url: `https://kultura.id/${locale}`,
+      url: `https://kulturaproperties.com/${locale}`,
       images: [{ url: "/og/og-image.jpg", width: 1200, height: 630, alt: isId ? "Kultura Properties — Perumahan Cisauk Tangerang" : "Kultura Properties — Residential Developer Cisauk Tangerang" }],
     },
     twitter: {

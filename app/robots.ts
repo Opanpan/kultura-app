@@ -15,7 +15,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "Bytespider", allow: "/" },
       { userAgent: "CCBot", allow: "/" },
     ],
-    sitemap: "https://kultura.id/sitemap.xml",
-    host: "https://kultura.id",
+    sitemap: "https://kulturaproperties.com/sitemap.xml",
+    host: "https://kulturaproperties.com",
   };
 }

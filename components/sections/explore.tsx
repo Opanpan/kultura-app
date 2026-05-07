@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { m, LazyMotion } from "framer-motion";
 import { MapPin, Clock, Navigation } from "lucide-react";
 import { fadeUp, stagger } from "@/lib/animations";
@@ -16,8 +17,11 @@ const landmarks = [
   { key: "5", image: "/images/nearby/ice-bsd.webp" },
 ] as const;
 
+const MAP_SRC = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0!2d106.6280742!3d-6.3536272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69e36236a1832d:0xa636e9532b3f5430!2sKultura+Properties+(Marketing+Gallery+%2F+Office)!5e0!3m2!1sen!2sid!4v1";
+
 export default function Explore({ dict }: { dict: Dictionary }) {
   const t = dict.explore;
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   const items = landmarks.map((l) => ({
     ...l,
@@ -60,15 +64,40 @@ export default function Explore({ dict }: { dict: Dictionary }) {
               viewport={{ once: true }}
               className="lg:w-[55%] shrink-0"
             >
-              <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/3" }}>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0!2d106.6280742!3d-6.3536272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69e36236a1832d:0xa636e9532b3f5430!2sKultura+Properties+(Marketing+Gallery+%2F+Office)!5e0!3m2!1sen!2sid!4v1"
-                  className="absolute inset-0 w-full h-full border-0"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Kultura Properties Location"
-                />
+              <div
+                className="relative rounded-2xl overflow-hidden cursor-pointer"
+                style={{ aspectRatio: "4/3" }}
+                onClick={() => setMapLoaded(true)}
+              >
+                {mapLoaded ? (
+                  <iframe
+                    src={MAP_SRC}
+                    className="absolute inset-0 w-full h-full border-0"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Kultura Properties Location"
+                  />
+                ) : (
+                  <>
+                    <Image
+                      src="/images/map-pin.svg"
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                      aria-hidden="true"
+                    />
+                    <div className="absolute inset-0" style={{ background: "var(--muted)" }} />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: "var(--fg)" }}>
+                        <MapPin className="w-5 h-5" style={{ color: "var(--bg)" }} />
+                      </div>
+                      <p className="text-sm font-medium" style={{ color: "var(--fg)" }}>Kultura Properties</p>
+                      <p className="text-xs" style={{ color: "var(--muted-fg)" }}>Klik untuk membuka peta</p>
+                    </div>
+                  </>
+                )}
               </div>
             </m.div>
 

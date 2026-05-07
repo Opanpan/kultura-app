@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://kultura.id";
+const BASE_URL = "https://kulturaproperties.com";
 const locales = ["en", "id"];
 
 export default function sitemap(): MetadataRoute.Sitemap {

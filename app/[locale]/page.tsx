@@ -14,7 +14,7 @@ function BreadcrumbSchema({ locale }: { locale: string }) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: `https://kultura.id/${locale}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: `https://kulturaproperties.com/${locale}` },
     ],
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
