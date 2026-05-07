@@ -39,14 +39,21 @@ export default function Footer({ dict, locale }: { dict: Dictionary; locale: Loc
 
       <div className="relative max-w-[1400px] mx-auto px-6 pt-16 pb-8">
 
+        {/* Logo — mobile only, always on top */}
+        <div className="lg:hidden mb-10">
+          <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.1)" }}>
+            <Image src="/images/logo-white.png" alt="Kultura Properties" width={28} height={28} />
+          </div>
+        </div>
+
         {/* Main 2-col grid */}
-        <div className="grid grid-cols-1 gap-16 mb-16 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-16 mb-16 lg:grid-cols-2 [&>*:first-child]:order-2 [&>*:last-child]:order-1 lg:[&>*:first-child]:order-1 lg:[&>*:last-child]:order-2">
 
           {/* LEFT — brand + nav + contact + socials */}
           <div className="flex flex-col">
             {/* Logo + tagline */}
             <div className="mb-10">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mb-5" style={{ background: "rgba(255,255,255,0.1)" }}>
+              <div className="hidden lg:flex w-10 h-10 rounded-full items-center justify-center mb-5" style={{ background: "rgba(255,255,255,0.1)" }}>
                 <Image src="/images/logo-white.png" alt="Kultura Properties" width={28} height={28} />
               </div>
               <h2 className="text-2xl md:text-3xl font-bold leading-tight mb-4">{t.tagline}</h2>

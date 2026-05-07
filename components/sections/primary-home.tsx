@@ -35,9 +35,9 @@ function AnimatedNumber({ target }: { target: string }) {
 const loadFeatures = () => import("@/lib/framer-features").then((r) => r.default);
 
 const projects = [
+  { src: "/images/products/abaya/facade-v3.webp", label: "New Abaya Village" },
   { src: "/images/projects/matano-boulevard.webp", label: "Matano Boulevard" },
   { src: "/images/projects/cluster-innari.webp", label: "Cluster Innari" },
-  { src: "/images/projects/new-abaya-village.webp", label: "New Abaya Village" },
 ];
 
 const nearby = [

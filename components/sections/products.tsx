@@ -17,7 +17,7 @@ const products = [
     name: "Innari 2 Lantai",
     price: "Rp 900Jt-an",
     tag: "Cluster",
-    images: ["/images/products/innari-2lt/facade-new-v2.webp", "/images/products/innari-2lt/layout-v2.webp"],
+    images: ["/images/products/innari-2lt/facade-new-v2.webp", "/images/products/innari-2lt/layout-v2.webp", "/images/products/innari-2lt/2-v2.webp"],
   },
   {
     id: "innari-1lt",
