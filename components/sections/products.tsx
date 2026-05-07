@@ -46,7 +46,7 @@ const products = [
     subtitle: { id: "1 Unit Terakhir 1,7 Miliar", en: "1 Last Unit 1.7 Billion" },
     price: "Rp 900Jt-an",
     tag: "Village",
-    images: ["/images/products/abaya/1-v2.webp", "/images/products/abaya/layout-2-v2.webp", "/images/products/abaya/layout-1-v2.webp", "/images/products/abaya/3-v2.webp", "/images/products/abaya/2-v2.webp", "/images/products/abaya/4-v2.webp", "/images/products/abaya/5-v2.webp", "/images/products/abaya/6-v2.webp", "/images/products/abaya/7-v2.webp", "/images/products/abaya/8-v2.webp", "/images/products/abaya/9-v2.webp", "/images/products/abaya/10-v2.webp"],
+    images: ["/images/products/abaya/facade-v3.webp", "/images/products/abaya/1-v2.webp", "/images/products/abaya/layout-2-v2.webp", "/images/products/abaya/layout-1-v2.webp", "/images/products/abaya/3-v2.webp", "/images/products/abaya/2-v2.webp", "/images/products/abaya/4-v2.webp", "/images/products/abaya/5-v2.webp", "/images/products/abaya/6-v2.webp", "/images/products/abaya/7-v2.webp", "/images/products/abaya/8-v2.webp", "/images/products/abaya/9-v2.webp", "/images/products/abaya/10-v2.webp"],
   },
   {
     id: "fontana",
