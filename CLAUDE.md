@@ -75,4 +75,4 @@ Reusable Framer Motion variants live in `lib/animations.ts` (`fadeUp`, `fadeIn`,
 
 ### Deployment
 
-Docker-based. `next.config.ts` sets `output: "standalone"`. The `proxy-network/` directory contains an Nginx reverse-proxy config for production (`kultura.id`). Use `init-deploy.sh` / `init-letsencrypt.sh` for first-time server setup.
+Docker-based. `next.config.ts` sets `output: "standalone"`. The shared nginx-proxy + acme-companion reverse proxy lives in the `personal-website` repo (`proxy-network/`); this repo only joins the external `proxy-network` Docker network. Use `init-deploy.sh` / `init-letsencrypt.sh` for first-time server setup.

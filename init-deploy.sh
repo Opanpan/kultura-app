@@ -25,7 +25,7 @@ echo -e "Domain: ${GREEN}$DOMAIN${NC}\n"
 # Ensure shared proxy is running
 if ! docker ps --format '{{.Names}}' | grep -q '^nginx-proxy$'; then
     echo -e "${RED}Error: nginx-proxy is not running.${NC}"
-    echo -e "Start it first: ${YELLOW}docker compose -f /path/to/proxy-network/docker-compose.yml up -d${NC}"
+    echo -e "Start it first: ${YELLOW}docker compose -f /path/to/personal-website/proxy-network/docker-compose.yml up -d${NC}"
     exit 1
 fi
 
